@@ -1,0 +1,129 @@
+import {
+    React,Component,BootstrapTable,
+    paginationFactory,Button, ButtonToolbar, Card, 
+    Form, Col, Row, axios, Typeahead, TimePicker,
+    cellEditFactory ,moment, NavLink, Alert, AppConfiguration,
+    NoserLoading, Noser, Banner, Container, DatePicker, LeaveModal, Tabs, Tab,
+    sizePerPageRenderer
+} 
+from '../../noser-hris-component';
+
+class JobOpeningSourceCreate extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            userinfo  :   [],
+            isloading :   false,
+            isshow    :   false,
+            alerttype :   "",
+            message   :   "",
+            color     :   "",
+            fade      :   true,
+            name:"",
+            
+        }
+         
+    }
+
+    componentDidMount() {
+        const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))}
+        this.state.userinfo = JSON.parse(sessionStorage.getItem("userData"))
+        sleep(1000).then(() => {
+            this.setState({isLoading:false})}) 
+       
+    }
+
+    onChangeJobOpening(e){
+        console.log(e)
+        this.setState({name:e.target.value})
+    }
+
+    handleSaveClick = event => {
+        const jobOpeningParams = {
+            "IpAddress":"0.0.0.0",
+            "UserId":"1",
+	        "ClientId":"1",
+            "Name":this.state.name
+        }
+        console.log(jobOpeningParams)
+        axios
+            .post(
+                AppConfiguration.Setting().noserapiendpoint + "Maintenance/AddJobOpening",  jobOpeningParams
+            )
+            .then(res => {
+                const data = res.data;
+                console.log("Get data");
+                console.log(data)
+                this.setState({isLoading:false})
+
+                    var alertType = (data.status=="1") ? "success" : "danger"
+                this.setState(
+                    {
+                        isLoading:false,
+                        AlertType:"Success!",
+                        show:true,
+                        Color:alertType,
+                        Message:data.message ,
+                        Fade:true
+                    });
+            })
+            .catch(error=>{
+                this.setState(
+                {
+                    isLoading:false,
+                    AlertType:"Error! ",
+                    Show:true,
+                    Color:"danger",
+                    Message: "An error occured while processing your request, Please contact your System Administrator for : " + error.message,
+                    Fade:true
+            })
+        })
+
+    }
+
+    render() {
+        
+
+        return(
+            <div>
+                <Banner />
+                    <Container className="mt-5">
+                        <Card>
+                            <Card.Header>Create JobOpening Source</Card.Header>
+                            <Card.Body>
+                                <Form>
+                                    <Alert color="success" isOpen={this.state.show} color={this.state.Color} fade={this.state.Fade}>
+                                        {this.state.Message}
+                                    </Alert>
+                                    <Form.Row>
+                                        <Col sm={6}>
+                                            <Form.Control 
+                                                name="name"
+                                                type="text" 
+                                                placeholder="Name" 
+                                                value={this.state.name} 
+                                                onChange={this.onChangeJobOpening.bind(this)} 
+                                                autoComplete="off" 
+                                            />
+                                        </Col>
+
+                                    </Form.Row>
+                                    <ButtonToolbar sm={12} className="mt-3">
+                                        <Button variant="primary"  onClick={this.handleSaveClick}>
+                                            Submit
+                                        </Button>&nbsp;&nbsp;
+                                        <Button variant="danger" href="/JobOpeningSource">
+                                            Back
+                                        </Button>
+                                    </ButtonToolbar>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Container>
+            </div> 
+            
+        )
+    }
+}
+
+export default JobOpeningSourceCreate;
