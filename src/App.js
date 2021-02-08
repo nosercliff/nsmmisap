@@ -268,6 +268,10 @@ import EmployeeFinalsPay from './components/Training/Admin/EmployeeFinalsPay'
 import EmployeeFinalsPayCreate from './components/Training/Admin/EmployeeFinalsPayCreate'
 */
 
+// SAP START
+import InventoryTransferRequest from './components/SapProject/InventoryTransferRequest'
+import InventoryTransfer from './components/SapProject/InventoryTransfer'
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
@@ -287,8 +291,11 @@ class App extends Component {
                     <Switch>
                         <Route path="/" exact component={Login}/>
                         <ProtectedRoute path="/home" exact component={Home}/>
+                        <ProtectedRoute path="/InventoryTransferRequest" exact component={InventoryTransferRequest}/>
+                        <ProtectedRoute path="/InventoryTransfer" exact component={InventoryTransfer}/>
 
                         <Route path="*" component={Unathorized}/>
+                        
                     </Switch>
                 </BrowserRouter>
             </div>
