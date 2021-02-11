@@ -145,7 +145,7 @@ class ListOfItems extends Component {
                  >
                 <Modal.Header closeButton className="card-header">
                     <Modal.Title id="contained-modal-title-vcenter">
-                        LIST OF ITEMS
+                       List Of Items
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -215,13 +215,13 @@ class ListOfItems extends Component {
                 <Modal.Footer>
                     <ButtonToolbar >
                         <Button variant="success" className="ml-auto" >
-                            CHOOSE
+                            Choose
                         </Button>&nbsp;&nbsp;
                         <Button variant="danger" onClick={this.onModalClose} >
                             Cancel
                         </Button>&nbsp;&nbsp;
                         <Button variant="success" onClick={this.onModalClose} >
-                            NEW
+                            New
                         </Button>
                     </ButtonToolbar>
                 </Modal.Footer>

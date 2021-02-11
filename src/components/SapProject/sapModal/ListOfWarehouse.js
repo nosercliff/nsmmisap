@@ -161,13 +161,13 @@ class ListOfWarehouse extends Component {
                 <Modal.Footer>
                     <ButtonToolbar >
                         <Button variant="success"onClick={this.onModalClose}  className="ml-auto" >
-                            CHOOSE
+                            Choose
                         </Button>&nbsp;&nbsp;
                         <Button variant="danger" onClick={this.onModalClose} >
                             Cancel
                         </Button>&nbsp;&nbsp;
                         <Button variant="success" onClick={this.onModalClose} >
-                            NEW
+                            New
                         </Button>
                     </ButtonToolbar>
                 </Modal.Footer>
