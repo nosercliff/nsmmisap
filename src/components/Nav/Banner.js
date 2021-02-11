@@ -42,6 +42,7 @@ componentDidMount(){
                   <NavDropdown.Item href="/home">Sample Submenu</NavDropdown.Item>
                   <NavDropdown.Item href="/InventoryTransferRequest">Inventory Transfer Request</NavDropdown.Item>
                   <NavDropdown.Item href="/InventoryTransfer">Inventory Transfer</NavDropdown.Item>
+                  <NavDropdown.Item href="/SalesOrder">SalesOrder</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Accounts Payable" id="basic-nav-dropdown" > 
                   <NavDropdown.Item href="/home">Sample Submenu</NavDropdown.Item>
