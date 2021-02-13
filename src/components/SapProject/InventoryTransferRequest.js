@@ -6,15 +6,10 @@ import {
     NoserLoading, Noser, sizePerPageRenderer, DatePicker, Tabs, Tab
 } 
 from '../../noser-hris-component';
-import { DropdownButton, Dropdown} from 'react-bootstrap';
+import { ArrowRight } from 'react-bootstrap-icons';
 
-//import  TrainingRegisterModal from './TrainingModal/TrainingRegisterModal'
 import ListOfItems from './sapModal/ListOfItems'
 import ListOfWarehouse from './sapModal/ListOfWarehouse';
-import BatchesSetup from './sapModal/BatchesSetup';
-import BatchNoSelection from './sapModal/BatchNoSelection';
-import { ContentWriter } from 'istanbul-lib-report';
-import Glyphicon from 'glyphicons'
 
  
 class InventoryTransferRequest extends Component {
@@ -29,55 +24,46 @@ class InventoryTransferRequest extends Component {
             isloading       :   false,
             alerttype       :   "",
 
-            getShipTo       :   "",
-            unKnownData     :   [],
-            valueDummydata  :   "Open",
-            modalListOfItems         :   false,
-            modalListOfWarehouse     :   false,
-            modalBatchNoSelection    :   false,
-            modalBatchSetup          :  false,
+            DataTmp:[],
+            wareHouseData:[],
+            businessPartner: "",
+            Name:"",
+            Warehouses:"",
+            unknownData: "",
+            modalListOfItems: false,
+            modalListOfWarehouse: false,
 
-            //DUMMY DATA
-            sapData: [],
-            ITEMNO              :   "",
-            ITEMDISCRIPTION     :   "",
-            FROMWAREHOUSE       :   "",
-            TOWAREHOUSE         :   "",
-            QUANTITY            :   "",
-            INVENTORYUoM        :   "",
-            UoMCODE             :   "",
-            UoMNAME             :   "",
-            DISTRRULE           :   "",
-            QTYINVENTORYUoM     :   "",
-            QTYINWHSE           :   "",
-            ALREADYSAVE         :   "",
-            BOX                 :   "",
+            postingDate : new Date(),
+            documentDate : new Date(),
+            shipToAutocomplete : [
+                { "name" : "Caloocan City" },
+                { "name" : "Makati City" },
+                { "name" : "Taguig City" },
+                { "name" : "Quezon City" },
+            ],
+            contentsTableList : [
+                { "id" : "1", "idNo" : "1",     "itemNo" : "PO0018",    "itemDesc" : "Liver",           "fromWarehouse" : "WHS0001", "toWarehouse" : "WHS0026", "quantity" : "1,000",   "inventoryUoM" : "No", "uomCode" : "KG", "uomName" : "KG",  "distRule" : "", "qtyInventoryUom" : "1,000",   "qtyInWhse" : "11,704.6",   "alreadySave" : "0",  },
+                { "id" : "2", "idNo" : "2",     "itemNo" : "PO0040",    "itemDesc" : "Entrails(set)",   "fromWarehouse" : "WHS0001", "toWarehouse" : "WHS0026", "quantity" : "1,000",   "inventoryUoM" : "No", "uomCode" : "KG", "uomName" : "KG",  "distRule" : "", "qtyInventoryUom" : "1,000",   "qtyInWhse" : "",           "alreadySave" : "0",  },
+                { "id" : "3", "idNo" : "3",     "itemNo" : "PO0036",    "itemDesc" : "Ear",             "fromWarehouse" : "WHS0001", "toWarehouse" : "WHS0026", "quantity" : "1,000",   "inventoryUoM" : "No", "uomCode" : "KG", "uomName" : "KG",  "distRule" : "", "qtyInventoryUom" : "1,000",   "qtyInWhse" : "5,508.089",  "alreadySave" : "0",  },
+                { "id" : "4", "idNo" : "4",     "itemNo" : "",          "itemDesc" : "",               "fromWarehouse" : "WHS0001", "toWarehouse" : "WHS0026", "quantity" : "",        "inventoryUoM" : "", "uomCode" : "", "uomName" : "",        "distRule" : "", "qtyInventoryUom" : "",        "qtyInWhse" : "",           "alreadySave" : "0",  },
+            ],
+            businessPartnerAutocomplete : [],
         }
     }
 
     componentDidMount(){
         const sleep = (milliseconds) => {return new Promise(resolve => setTimeout(resolve, milliseconds))}
         this.state.userinfo = JSON.parse(sessionStorage.getItem("userData"))
-        this.GetDummyDataSAP();
+        this.GetBusinessPartnerData()
+        //this.GetListOfWarehouses()
     }
 
-   
-    /* showTrainingRegisterModal = (e) => {
-        this.setState({modalTrainingRegisterShow: true})
-    }
-    handleModalClose = (e) =>{
-        //reload or refresh data here
-        //alert("Data pass from child : " + e)
-        this.setState({modalTrainingRegisterShow: false})
-    } */
-
-
-    GetDummyDataSAP(){
+    GetBusinessPartnerData(){
 
     let filter_data = {}
     
     const getParams = {
-        "_collection" : "DummyDataSAP",
+        "_collection" : "BusinessPartner",
         "filter_data" : filter_data
         }
         axios
@@ -85,653 +71,1169 @@ class InventoryTransferRequest extends Component {
         .then(res => {
         const data = res.data
         //console.log("Start SAP data")
-        //console.log(data["DummyDataSAP"])
+        //console.log(data["BusinessPartner"])
         //console.log("End SAP data")
-        const itemUsersDataLists = this.buildList(data["DummyDataSAP"])
+        const itemUsersDataLists = this.buildList(data["BusinessPartner"])
         let SapList =[]
         for (let i = 0; i < itemUsersDataLists.length; i++) {
             let obj = {
                 'id'                :   itemUsersDataLists[i]['id'].replace(" '","").replace("'",""),
-                'ITEMNO'            :   itemUsersDataLists[i]['ITEMNO'].replace(" '","").replace("'",""),
-                'ITEMDISCRIPTION'   :   itemUsersDataLists[i]['ITEMDISCRIPTION'].replace(" '","").replace("'",""),
-                'FROMWAREHOUSE'     :   itemUsersDataLists[i]['FROMWAREHOUSE'].replace(" '","").replace("'",""),
-                'TOWAREHOUSE'       :   itemUsersDataLists[i]['TOWAREHOUSE'].replace(" '","").replace("'",""),
-                'QUANTITY'          :   itemUsersDataLists[i]['QUANTITY'].replace(" '","").replace("'",""),
-                'INVENTORYUoM'      :   itemUsersDataLists[i]['INVENTORYUoM'].replace(" '","").replace("'",""),
-                'UoMCODE'           :   itemUsersDataLists[i]['UoMCODE'].replace(" '","").replace("'",""),
-                'UoMNAME'           :   itemUsersDataLists[i]['UoMNAME'].replace(" '","").replace("'",""),
-                'DISTRRULE'         :   itemUsersDataLists[i]['DISTRRULE'].replace(" '","").replace("'",""),
-                'QTYINVENTORYUoM'   :   itemUsersDataLists[i]['QTYINVENTORYUoM'].replace(" '","").replace("'",""),
-                'QTYINWHSE'         :   itemUsersDataLists[i]['QTYINWHSE'].replace(" '","").replace("'",""),
-                'ALREADYSAVE'       :   itemUsersDataLists[i]['ALREADYSAVE'].replace(" '","").replace("'",""),
-                'BOX'               :   itemUsersDataLists[i]['BOX'].replace(" '","").replace("'",""),
+                'businessPartner'   :   itemUsersDataLists[i]['businessPartner'].replace(" '","").replace("'",""),
+                'Name'              :   itemUsersDataLists[i]['Name'].replace(" '","").replace("'",""),
+                'isDeleted'         :   itemUsersDataLists[i]['isDeleted'].replace(" '","").replace("'",""),
+                'isModified'        :   itemUsersDataLists[i]['isModified'].replace(" '","").replace("'",""),
+                'isDraft'           :   itemUsersDataLists[i]['isDraft'].replace(" '","").replace("'",""),
+                'createdby'         :   itemUsersDataLists[i]['createdby'].replace(" '","").replace("'",""),
+                'createddate'       :   itemUsersDataLists[i]['createddate'].replace(" '","").replace("'",""),
+                'modifiedby'        :   itemUsersDataLists[i]['modifiedby'].replace(" '","").replace("'",""),
+                'modifieddate'      :   itemUsersDataLists[i]['modifieddate'].replace(" '","").replace("'",""),
             }
             SapList.push(obj)
         }
-        this.setState({sapData : SapList})
-        console.log("sapData")
-        console.log(this.state.sapData)
+        this.setState({DataTmp : SapList})
         })
         .catch(error=>{
-            //console.log("error: " + error)
+            console.log("error: " + error)
         })
     }
+
     buildList = (data) => {
 
         let itemList =[]
-     
-        let idList                  =[]
-        let ITEMNOList              =[]
-        let ITEMDISCRIPTIONList     =[]
-        let FROMWAREHOUSEList       =[]
-        let TOWAREHOUSEList         =[]
-        let QUANTITYList            =[]
-        let INVENTORYUoMList        =[]
-        let UoMCODEList             =[]
-        let UoMNAMEList             =[]
-        let DISTRRULEList           =[]
-        let QTYINVENTORYUoMList     =[]
-        let QTYINWHSEList           =[]
-        let ALREADYSAVEList         =[]
-        let BOXList                 =[]
         
+        let idList                  =[]
+        let businessPartnerList     =[]
+        let NameList                =[]
+        let isDeletedList           =[]
+        let isModifiedList          =[]
+        let isDraftList             =[]
+        let createdbyList           =[]
+        let createddateList         =[]
+        let modifiedbyList          =[]
+        let modifieddateList        =[]
     
         for (let i = 0; i < data.length; i++) {
+
             let s1 = data[i].split(",")
             let idClean = s1[0].replace("ObjectId(","").replace(")","").replace("{","")
-            let modifiedClean = s1[13].replace("}","")
+            let modifiedClean = s1[8].replace("}","")
             idList.push(idClean.split(":")[1])
-            ITEMNOList.push(s1[1].split(":")[1])
-            ITEMDISCRIPTIONList.push(s1[2].split(":")[1])
-            FROMWAREHOUSEList.push(s1[3].split(":")[1])
-            TOWAREHOUSEList.push(s1[4].split(":")[1])
-            QUANTITYList.push(s1[5].split(":")[1])
-            INVENTORYUoMList.push(s1[6].split(":")[1])
-            UoMCODEList.push(s1[7].split(":")[1])
-            UoMNAMEList.push(s1[8].split(":")[1])
-            DISTRRULEList.push(s1[9].split(":")[1])
-            QTYINVENTORYUoMList.push(s1[10].split(":")[1])
-            QTYINWHSEList.push(s1[11].split(":")[1])
-            ALREADYSAVEList.push(s1[12].split(":")[1])
-            BOXList.push(modifiedClean.split(":")[1])
+            businessPartnerList.push(s1[1].split(":")[1])
+            NameList.push(s1[2].split(":")[1])
+            isDeletedList.push(s1[3].split(":")[1])
+            isModifiedList.push(s1[4].split(":")[1])
+            isDraftList.push(s1[5].split(":")[1])
+            createdbyList.push(s1[6].split(":")[1])
+            createddateList.push(s1[7].split(":")[1])
+            modifiedbyList.push(s1[8].split(":")[1])
+            modifieddateList.push(modifiedClean.split(":")[1])
+
         }
         for (let i = 0; i < idList.length; i++) {
         //console.log("object")
             let obj = {
                 "id"                :   idList[i],
-                "ITEMNO"            :   ITEMNOList[i],
-                "ITEMDISCRIPTION"   :   ITEMDISCRIPTIONList[i],
-                "FROMWAREHOUSE"     :   FROMWAREHOUSEList[i],
-                "TOWAREHOUSE"       :   TOWAREHOUSEList[i],
-                "QUANTITY"          :   QUANTITYList[i],
-                "INVENTORYUoM"      :   INVENTORYUoMList[i],
-                "UoMCODE"           :   UoMCODEList[i],
-                "UoMNAME"           :   UoMNAMEList[i],
-                "DISTRRULE"         :   DISTRRULEList[i],
-                "QTYINVENTORYUoM"   :   QTYINVENTORYUoMList[i],
-                "QTYINWHSE"         :   QTYINWHSEList[i],
-                "ALREADYSAVE"       :   ALREADYSAVEList[i],
-                "BOX"               :   BOXList[i],
+                "businessPartner"   :   businessPartnerList[i],
+                "Name"              :   NameList[i],
+                "isDeleted"         :   isDeletedList[i],
+                "isModified"        :   isModifiedList[i],
+                "isDraft"           :   isDraftList[i],
+                "createdby"         :   createdbyList[i],
+                "createddate"       :   createddateList[i],
+                "modifiedby"        :   modifiedbyList[i],
+                "modifieddate"      :   modifieddateList[i],
             
             }
             itemList.push(obj)
         }
         return itemList
-    }
-/* 
-    GridDataModified(oldValue, newValue, id, column) {
-        ////console.log(id)
-        this.state.trainingScheduleTableList.map(function(item,i) {
-            if (item.id===id)
-                item.isModified = newValue!=oldValue ? "1" : "0"
-        })
-    } */
-    CreateCaseButton(){
-        alert("Test Button!!.") 
-    }
-    onChangeShipTo(){
+    };
 
+   /*  GetListOfWarehouses(){  
+
+        let filter_data = {}
+    
+        const getParams = {
+        "_collection" : "ListOfWarehouses",
+        "filter_data" : filter_data
+        }
+        axios
+        .post("http://134.209.99.190:8088/action/get" , getParams)
+        .then(res => {
+        const dataTmp = res.data
+        //console.log("Start ListOfWarehouses")
+        //console.log(dataTmp["ListOfWarehouses"])
+        //console.log("End ListOfWarehouses")
+        const itemUsersDataListsTmp = this.buildList(dataTmp["ListOfWarehouses"])
+        let warehousesTmp =[]
+        for (let i = 0; i < itemUsersDataListsTmp.length; i++) {
+            let obj = {
+                'id'                :   itemUsersDataListsTmp[i]['id'].replace(" '","").replace("'",""),
+                'Warehouses'        :   itemUsersDataListsTmp[i]['Warehouses'].replace(" '","").replace("'",""),
+                'isDeleted'         :   itemUsersDataListsTmp[i]['isDeleted'].replace(" '","").replace("'",""),
+                'isModified'        :   itemUsersDataListsTmp[i]['isModified'].replace(" '","").replace("'",""),
+                'isDraft'           :   itemUsersDataListsTmp[i]['isDraft'].replace(" '","").replace("'",""),
+                'createdby'         :   itemUsersDataListsTmp[i]['createdby'].replace(" '","").replace("'",""),
+                'createddate'       :   itemUsersDataListsTmp[i]['createddate'].replace(" '","").replace("'",""),
+                'modifiedby'        :   itemUsersDataListsTmp[i]['modifiedby'].replace(" '","").replace("'",""),
+                'modifieddate'      :   itemUsersDataListsTmp[i]['modifieddate'].replace(" '","").replace("'",""),
+            }
+            warehousesTmp.push(obj)
+        }
+        this.setState({wareHouseData : warehousesTmp})
+        //console.log("wareHouseData")
+        //console.log(this.state.wareHouseData)
+        })
+        .catch(error=>{
+            console.log("error: " + error)
+        })
     }
-    handleShowListOfItems = ()=>{
+    
+    buildList = (dataTmp) => {
+
+        let itemList =[]
+        
+        let idList                  =[]
+        let WarehousesList          =[]
+        let isDeletedList           =[]
+        let isModifiedList          =[]
+        let isDraftList             =[]
+        let createdbyList           =[]
+        let createddateList         =[]
+        let modifiedbyList          =[]
+        let modifieddateList        =[]
+        
+    
+        for (let i = 0; i < dataTmp.length; i++) {
+            let s1 = dataTmp[i].split(",")
+            let idClean = s1[0].replace("ObjectId(","").replace(")","").replace("{","")
+            let modifiedClean = s1[8].replace("}","")
+            idList.push(idClean.split(":")[1])
+            WarehousesList.push(s1[1].split(":")[1])
+            isDeletedList.push(s1[2].split(":")[1])
+            isModifiedList.push(s1[3].split(":")[1])
+            isDraftList.push(s1[4].split(":")[1])
+            createdbyList.push(s1[5].split(":")[1])
+            createddateList.push(s1[6].split(":")[1])
+            modifiedbyList.push(s1[7].split(":")[1])
+            modifieddateList.push(modifiedClean.split(":")[1])
+        }
+        for (let i = 0; i < idList.length; i++) {
+        //console.log("object")
+            let obj = {
+                "id"                :   idList[i],
+                "Warehouses"        :   WarehousesList[i],
+                "isDeleted"         :   isDeletedList[i],
+                "isModified"        :   isModifiedList[i],
+                "isDraft"           :   isDraftList[i],
+                "createdby"         :   createdbyList[i],
+                "createddate"       :   createddateList[i],
+                "modifiedby"        :   modifiedbyList[i],
+                "modifieddate"      :   modifieddateList[i],
+            
+            }
+            itemList.push(obj)
+        }
+        return itemList
+    }  */ 
+
+    onChangeBusinessPartner= (e) =>{
+        if(e.length == 0){
+            this.businessPartner = ""
+            return
+        }
+       this.state.businessPartner = e[0].businessPartner
+       
+       //console.log(this.state.businessPartner + " :businessPartner")
+    }
+
+    onChangeName= (e) =>{
+        if(e.length == 0){
+            this.Name = ""
+            return
+        }
+       this.state.Name = e[0].name
+       //console.log(this.state.businessPartner + " :businessPartner")
+    }
+
+    onChangeonChangeWarehouses= (e) =>{
+        if(e.length == 0){
+            this.Warehouses = ""
+            return
+        }
+       this.state.unknownData = e[0].whse
+       //this.setState({wareHouse: e.target.value})
+    }
+
+    handleChangePostingDate = date => {
+        this.setState({
+            postingDate : date
+        })
+    }
+
+    handleChangeDocumentDate = date => {
+        this.setState({
+            documentDate : date
+        })
+    }
+
+    handleClickItems = () => {
+        //alert("Test")
         this.setState({
             modalListOfItems:   true
-            //modalListOfWarehouse:   true
-            //modalBatchNoSelection: true
-            //modalBatchSetup: true
         })
     }
+
     handleShowListOfWarehouse = ()=>{
         this.setState({
             modalListOfWarehouse:   true
         })
     }
 
-    
     handleModalCloseItems = (e) =>{
         this.setState({
-            modalListOfItems: false,
-            //modalListOfWarehouse: false,
-            //modalBatchNoSelection: false,
-            //modalBatchSetup: false
+            modalListOfItems:   false,
         })
     }
+
     handleModalCloseWarehouse = (e) =>{
         this.setState({
-            //modalListOfItems: false,
             modalListOfWarehouse: false,
-            //modalBatchNoSelection: false,
-            //modalBatchSetup: false
         })
     }
+
 
     render() {
 
-        const selectDummyOptions = [
-            {key : "A"},
-            {key : "B"},
-            {key : "C"},
+        const Warehouses = [
+            {whse : "WHSH0001"},
+            {whse : "WHSH0002"},
+            {whse : "WHSH0003"},
+            {whse : "WHSH0004"},
+            {whse : "WHSH0005"},
+            {whse : "WHSH0006"},
+            {whse : "WHSH0007"},
+            {whse : "WHSH0008"},
+            {whse : "WHSH0009"},
+            {whse : "WHSH0010"},
+
         ];
+
+        const businessPartner = [
+
+            {Id : "Partner A"},
+            {Id : "Partner B"},
+            {Id : "Partner C"},
+            {Id : "Partner D"},
+            {Id : "Partner E"},
+            {Id : "Partner F"},
+            {Id : "Partner G"},
+
+            
+        ];
+
+        const Name = [
+
+            {name : "Partner A"},
+            {name : "Partner B"},
+            {name : "Partner C"},
+            {name : "Partner D"},
+            {name : "Partner E"},
+            {name : "Partner F"},
+            {name : "Partner G"},
+
+        ];
+
         const contentsColumn = [
             {
-                dataField   : 'ITEMNO',
+                dataField   : 'idNo',
+                text        : '#',
+                editable : false,
+            },
+            {
+                dataField   : 'itemNo',
                 text        : 'Item No.',
-                //formatter   : dataFormatter,
-                headerStyle : () => {
-                    return { width  : "7%" };
+                editable : false,
+                formatter   :   (cell, row, isSelect) => {
+                    if (cell)
+                    return (
+                        <Button style={{fontSize:'11px', textDecoration: "none"}}
+                            variant="link" onClick={this.handleClickItems}
+                        ><ArrowRight style={{color: "#f4d56e",}} size={20}/> <span style={{color: "#000000" }}>{row.itemNo}</span> </Button>
+                    );
                 },
-                events: {
-                    onClick: (e, column, columnIndex, ) => {
-                      //alert('item column');
-                      this.handleShowListOfItems(e);
-                    },
-                }
             },
             {
-                dataField   : 'ITEMDISCRIPTION',
+                dataField   : 'itemDesc',
                 text        : 'Item Description',
-                headerStyle : () => {
-                    return { width  : "10%" };
+                editable : false,
+                formatter   :   (cell, row, isSelect) => {
+                    if (cell)
+                    return (
+                        <Button style={{fontSize:'11px', textDecoration: "none"}}
+                            variant="link" onClick={this.handleClickItems}
+                        >{/* <ArrowRight style={{color: "#f4d56e",}} size={20}/>  */}<span style={{color: "#000000" }}>{row.itemDesc}</span> </Button>
+                    );
                 },
             },
-            
             {
-                dataField   : 'FROMWAREHOUSE',
+                dataField   : 'fromWarehouse',
                 text        : 'From Warehouse',
-                headerStyle : () => {
-                    return { width  : "9%" };
+                editable : false,
+                formatter   :   (cell, row, isSelect) => {
+                    if (cell)
+                    return (
+                        <Button style={{fontSize:'11px', textDecoration: "none"}}
+                            variant="link" onClick={this.handleShowListOfWarehouse}
+                        > <ArrowRight style={{color: "#f4d56e" }} size={20}/> <span style={{color: "#000000" }}>{row.toWarehouse}</span> </Button>
+                    );
                 },
-                events: {
-                    onClick: (e, column, columnIndex, ) => {
-                      //alert('item column');
-                      this.handleShowListOfWarehouse(e);
-                    },
-                }
             },
             {
-                dataField   : 'TOWAREHOUSE',
+                dataField   : 'toWarehouse',
                 text        : 'To Warehouse',
-                headerStyle : () => {
-                    return { width  : "7%" };
+                editable : false,
+                formatter   :   (cell, row, isSelect) => {
+                    if (cell)
+                    return (
+                        <Button style={{fontSize:'11px', textDecoration: "none"}}
+                            variant="link" onClick={this.handleShowListOfWarehouse}
+                        > <ArrowRight style={{color: "#f4d56e" }} size={20}/> <span style={{color: "#000000" }}>{row.toWarehouse}</span> </Button>
+                    );
                 },
-                events: {
-                    onClick: (e, column, columnIndex, ) => {
-                      //alert('item column');
-                      this.handleShowListOfWarehouse(e);
-                    },
-                }
             },
             {
-                dataField   : 'QUANTITY',
+                dataField   : 'quantity',
                 text        : 'Quantity',
-                headerStyle : () => {
-                    return { width  : "7%" };
-                }
+                editable : false,
             },
             {
-                dataField   : 'INVENTORYUoM',
+                dataField   : 'inventoryUoM',
                 text        : 'Inventory UoM',
-                headerStyle : () => {
-                    return { width  : "7%" };
-                }
+                editable : false,
             },
             {
-                dataField   : 'UoMCODE',
+                dataField   : 'uomCode',
                 text        : 'UoM Code',
-                headerStyle : () => {
-                    return { width  : "7%" };
-                }
+                editable : false,
             },
             {
-                dataField   : 'UoMNAME',
+                dataField   : 'uomName',
                 text        : 'UoM Name',
-                headerStyle : () => {
-                    return { width  : "7%" };
-                }
+                editable : false,
             },
             {
-                dataField   : 'DISTRRULE',
+                dataField   : 'distRule',
                 text        : 'Distr. Rule',
-                headerStyle : () => {
-                    return { width  : "7%" };
-                }
+                editable : false,
             },
             {
-                dataField   : 'QTYINVENTORYUoM',
-                text        : 'QTY(Inventory UoM)',
-                headerStyle : () => {
-                    return { width  : "7%" };
-                }
+                dataField   : 'qtyInventoryUom',
+                text        : 'Qty(Inventory Uom)',
+                editable : false,
             },
             {
-                dataField   : 'QTYINWHSE',
-                text        : 'QTY in Whse',
-                headerStyle : () => {
-                    return { width  : "10%" };
-                }
+                dataField   : 'qtyInWhse',
+                text        : 'Qty In Whse',
+                editable : false,
             },
             {
-                dataField   : 'ALREADYSAVE',
+                dataField   : 'alreadySave',
                 text        : 'Already Save',
-                headerStyle : () => {
-                    return { width  : "10%" };
-                }
+                editable : false,
             },
-            {
-                dataField   : 'BOX',
-                text        : 'Box',
-                headerStyle : () => {
-                    return { width  : "5%" };
-                }
-            },
-        ];
-        const selectRow = {
-            mode: 'radio',
-            clickToSelect: true,
-            hideSelectColumn: true,
-          };
-        /* const rowEvents = {
-            onClick: (e, row, rowIndex) => {
-               console.log("rowEvents")
-               this.handleShowListOfItems();
-               
-            }
-        }; */
+        ]
 
-    return(
+        const contentsSelectRow = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            style: { backgroundColor: '#fcdd82' },
+            onSelect: (row, isSelect, rowIndex, e) => {
+                this.state.contentsTableList.map(function(item,i){
+                    if(item.id===row.id)
+                    {
+                        item.isDeleted = isSelect ? "1" : "0"
+                        item.isModified = isSelect ? "1" : "0"
+                    }
+                })
+            }
+        };
+
+        const contentsRowEvents = {
+            onClick: (e, row, rowIndex) => {
+            }
+        };
+
+        return(
             <div>
                 <Banner />
                 <Container className="mt-5" fluid>
-                    <Card>
-                        <Card.Header>Inventory Transfer Request</Card.Header>
-                        <Card.Body>
-                            <Form>
-                                <Alert isOpen={this.state.isshow} color={this.state.color} fade={this.state.fade} className={this.state.isshow ? 'display-block' : 'display-none'}>
-                                    <div className={this.state.color}></div> 
-                                    {this.state.message}
-                                </Alert>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Business Partner
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type="text"
-                                            name="selectedEmployeeName"
-                                            value={this.state.selectedEmployeeName}
-                                            onChange={this.onChangePosition} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="1" style={{fontWeight : "bold"}}>
-                                        NO.
-                                    </Form.Label>
-                                    <Col sm="1">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                            placeholder="Primary"
-                                        />
-                                    </Col>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Name
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Status.
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.valueDummydata}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                            placeholder="Open"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Contact Person
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Posting Date.
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Ship To
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Typeahead
-                                            labelKey='key'
-                                            id="id"
-                                            onChange={this.onChangeShipTo}
-                                            options={selectDummyOptions}
-                                            placeholder="Select Shipping"
-                                        />
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Due Date.
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                    </Form.Label>
-                                    <Col sm="2">
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Document Date.
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.CreateCaseButton} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                    </Form.Label>
-                                    <Col sm="2">
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Referenced Document.
-                                    </Form.Label>
-                                    <Col sm="2">
-                                    <ButtonToolbar className="mt-1">
-                                        <Button variant="success" className="mr-auto" onClick={ this.CreateCaseButton }>
-                                            ...
-                                        </Button>&nbsp;&nbsp;
-                                    </ButtonToolbar>
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} className="mt-5" controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                    </Form.Label>
-                                    <Col sm="2">
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        From Warehouse
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                             type=""
-                                             name=""
-                                             value={this.state.unKnownData}
-                                             onChange={this.CreateCaseButton} 
-                                             autoComplete="off"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                    </Form.Label>
-                                    <Col sm="2">
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        To Warehouse
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                             type=""
-                                             name=""
-                                             value={this.state.unKnownData}
-                                             onChange={this.CreateCaseButton} 
-                                             autoComplete="off"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} className="mt-5" controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Price List
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Typeahead
-                                            labelKey='key'
-                                            id="id"
-                                            onChange={this.onChangeShipTo}
-                                            options={selectDummyOptions}
-                                            placeholder="Last Purchase Price"
-                                        />
-                                    </Col>
-                                </Form.Group>
+                    <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
+                        <Col sm="8">
+                            <Card style={{background : "#f0fff9"}}>
+                                <Card.Header style={{background : "#ababac"}}>INVENTORY >> TRANSFER REQUEST</Card.Header>
                                 <Card.Body>
-                                    <Tabs defaultActiveKey="default" className="mr-auto" transition={false} id="controlled-tab-example">
-                                    <Tab eventKey="default" title="Contents">
-                                        <Card className="card-tab">
-                                            
+                                    <Form>
+                                        <Alert isOpen={this.state.isshow} color={this.state.color} fade={this.state.fade} className={this.state.isshow ? 'display-block' : 'display-none'}>
+                                            <div className={this.state.color}></div> 
+                                            {this.state.message}
+                                        </Alert>   
+
+                                        <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                BUSINESS PARTNER
+                                            </Form.Label>
+                                            <Col sm="3">
+                                                <Typeahead
+                                                    labelKey='businessPartner'
+                                                    id="basic-example"
+                                                    onChange={this.onChangeBusinessPartner}
+                                                    options={this.state.DataTmp}
+                                                    autoComplete="off"
+                                                    readOnly
+                                                />
+                                            </Col>
+                                            <Col sm="1">
+                                            </Col>
+                                            <Form.Label column sm="1" style={{fontWeight : "bold"}}>
+                                                NO.
+                                            </Form.Label>
+                                            <Col sm="1">
+                                                <Form.Control 
+                                                    ref="employeeNo"
+                                                    name="employeeNo"
+                                                    value={this.state.employeeNo}
+                                                    onChange={this.onChangeEmployeeNo}
+                                                    autoComplete="off"
+                                                    readOnly
+                                                    placeholder="Primary"
+                                                />
+                                            </Col>
+                                            <Col sm="4">
+                                                <Form.Control 
+                                                    ref="employeeNo"
+                                                    name="employeeNo"
+                                                    value={this.state.employeeNo}
+                                                    onChange={this.onChangeEmployeeNo}
+                                                    autoComplete="off"
+                                                    readOnly
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                NAME
+                                            </Form.Label>
+                                            <Col sm="3">
+                                                <Typeahead 
+                                                    labelKey='Name'
+                                                    id="basic-example"
+                                                    onChange={this.onChangeName}
+                                                    options={this.state.DataTmp}
+                                                    autoComplete="off"
+                                                    readOnly
+                                                />
+                                            </Col>
+                                            <Col sm="1">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                STATUS
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <Form.Control 
+                                                    ref="employeeNo"
+                                                    name="employeeNo"
+                                                    value={this.state.employeeNo}
+                                                    onChange={this.onChangeEmployeeNo}
+                                                    autoComplete="off"
+                                                    readOnly
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                CONTACT PERSON
+                                            </Form.Label>
+                                            <Col sm="3">
+                                                <Form.Control 
+                                                    ref="name"
+                                                    name="name"
+                                                    value={this.state.name}
+                                                    onChange={this.onChangeName}
+                                                    autoComplete="off"
+                                                />
+                                            </Col>
+                                            <Col sm="1">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            POSTING DATE
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <DatePicker
+                                                    ref='postingDate'
+                                                    selected={this.state.postingDate}
+                                                    onChange={this.handleChangePostingDate}
+                                                    minDate={this.minDate}
+                                                    value={this.props.postingDate}
+                                                    dateFormat={"MM/dd/yyyy"}
+                                                    className="form-control"
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                SHIP TO
+                                            </Form.Label>
+                                            <Col sm="3">
+                                                <Form.Control as="select">
+                                                    <option>select ship to </option>
+                                                    <option>Caloocan City</option>
+                                                    <option>Quezon City</option>
+                                                </Form.Control>
+                                            </Col>
+                                            <Col sm="1">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            DOCUMENT DATE
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <DatePicker
+                                                    ref='documentDate'
+                                                    selected={this.state.documentDate}
+                                                    onChange={this.handleChangeDocumentDate}
+                                                    minDate={this.minDate}
+                                                    value={this.props.documentDate}
+                                                    dateFormat={"MM/dd/yyyy"}
+                                                    className="form-control"
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Col sm="6">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            REFERENCED DOCUMENT
+                                            </Form.Label>
+                                            <Col sm="4">
+                                            <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleEmpAdd}>
+                                                ...
+                                            </Button>
+                                            </Col>
+                                        </Form.Group>
+                                        <div style={{height: "70px"}}></div>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Col sm="6">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                FROM WAREHOUSE
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <Typeahead
+                                                    labelKey='whse'
+                                                    id="basic-example"
+                                                    onChange={this.onChangeWarehouses}
+                                                    options={Warehouses}
+                                                    autoComplete="off"
+                                                    readOnly
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Col sm="6">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                TO WAREHOUSE
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <Typeahead
+                                                    labelKey='whse'
+                                                    id="basic-example"
+                                                    onChange={this.onChangeWarehouses}
+                                                    options={Warehouses}
+                                                    autoComplete="off"
+                                                    readOnly
+                                                    //value={this.state.Warehouses}
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group className="mt-3" as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            PRICE LIST
+                                            </Form.Label>
+                                            <Col sm="3">
+                                                <Form.Control as="select">
+                                                    <option>select price list</option>
+                                                    <option>Last Purchase Price</option>
+                                                </Form.Control>
+                                            </Col>
+                                        </Form.Group>
+                                        <Card  className="mt-5" style={{background : "#f0fff9"}}>
                                             <Card.Body>
-                                                <Form.Group as={Col} sm={12}>
-                                                    <BootstrapTable
-                                                        keyField = "id"
-                                                        data = { this.state.sapData }
-                                                        columns = { contentsColumn }
-                                                        //selectRow = { employeeOBBracketRow }
-                                                        cellEdit = { cellEditFactory({ mode: 'dbclick', blurToSave: true }) }
-                                                        pagination={ paginationFactory({sizePerPage:15,hideSizePerPage:true,hidePageListOnlyOnePage:true})}
-                                                        rowClasses="noser-table-row-class"
-                                                        striped
-                                                        hover
-                                                        condensed
-                                                        //rowEvents={rowEvents}
-                                                        selectRow={selectRow}
-                                                    />
-                                                </Form.Group>
+                                                <Tabs defaultActiveKey="default" transition={false} id="noanim-tab-example">
+                                                    <Tab eventKey="default" title="Contents">
+                                                        <div className="mt-1">
+                                                            <BootstrapTable
+                                                                keyField = "id"
+                                                                data = { this.state.contentsTableList }
+                                                                columns = { contentsColumn }
+                                                                //pagination={ paginationFactory({sizePerPageRenderer}) }
+                                                                noDataIndication={ () => <div style={{width:'100%'}}>No record found.</div> }
+                                                                rowClasses="noser-table-row-class"
+                                                                striped
+                                                                hover
+                                                                condensed
+                                                                cellEdit = { cellEditFactory({
+                                                                    mode: 'dbclick',
+                                                                    blurToSave: true,
+                                                                    afterSaveCell: (oldValue, newValue, row, column) => {
+                                                                        this.GridDataModified(oldValue, newValue, row.id, column.dataField)
+                                                                        }
+                                                                    })
+                                                                }
+                                                                rowEvents={ contentsRowEvents }
+                                                                selectRow = { contentsSelectRow }
+
+                                                            />
+                                                        </div>
+                                                    </Tab>
+                                                    <Tab eventKey="sttachments" title="Attachments">
+
+                                                    </Tab>
+                                                </Tabs>
                                             </Card.Body>
                                         </Card>
-                                    </Tab>
-                                    <Tab eventKey="Attachment" width title="Attachment">
-                                        <Card className="card-tab">
-                                            
-                                            <Card.Body>
-                                                <Form.Group as={Col} sm={12}>
-                                                    <BootstrapTable
-                                                        keyField = "id"
-                                                        data = { this.state.unKnownData }
-                                                        columns = { contentsColumn }
-                                                        //selectRow = { employeeOBBracketRow }
-                                                        cellEdit = { cellEditFactory({ mode: 'dbclick', blurToSave: true }) }
-                                                        pagination={ paginationFactory({sizePerPage:15,hideSizePerPage:true,hidePageListOnlyOnePage:true})}
-                                                        rowClasses="noser-table-row-class"
-                                                        striped
-                                                        hover
-                                                        condensed
-                                                    />
-                                                </Form.Group>
-                                            </Card.Body>
-                                        </Card>
-                                    </Tab>
-                                    </Tabs>
-                                </Card.Body><Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Sales Employee
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.onChangePosition} 
-                                            autoComplete="off"
-                                            placeholder="-No Sales Employee-"
-                                        />
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Pick and Pack Remarks
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.onChangePosition} 
-                                            autoComplete="off"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Journal Remarks
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.onChangePosition} 
-                                            autoComplete="off"
-                                            placeholder="-Inventory Transfer Request-"
-                                        />
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                        Remarks
-                                    </Form.Label>
-                                    <Col sm="2">
-                                        <Form.Control 
-                                            type=""
-                                            name=""
-                                            value={this.state.unKnownData}
-                                            onChange={this.onChangePosition} 
-                                            autoComplete="off"
-                                            placeholder="WALK IN CONSO"
-                                        />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Col sm="2" className="mt-2 mr-auto" >
-                                        <Button variant="success" style={{minWidth:'60px'}} onClick={this.CreateCaseButton}>OK</Button>&nbsp;&nbsp;
-                                        <Button variant="danger"  style={{minWidth:'60px'}} onClick={this.CreateCaseButton} >Cancel</Button>
-                                    </Col>
-                                    <Col sm="4">
-                                    </Col>
-                                    <Col sm="2" className="ml-auto" >
-                                        <Dropdown.Toggle variant="success" style={{minWidth:'60px'}} onClick={this.CreateCaseButton}>Copy To</Dropdown.Toggle>&nbsp;&nbsp;
-                                        <Button variant="success" style={{minWidth:'60px'}} onClick={this.CreateCaseButton} >Inventory Transfer</Button>
-                                    </Col>
-                                    {/* <Form.Group as={Col}>
-                                        <Col sm="2" className="ml-auto" >
-                                            <Button className= "btn btn-info" style={{minWidth:'60px'}} onClick={this.CreateCaseButton}>Copy To</Button>&nbsp;&nbsp;
-                                            <Button variant="success" style={{minWidth:'60px'}} onClick={this.CreateCaseButton} >Inventory Transfer</Button>
+
+                                        <Form.Group className="mt-5" as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            SALES EMPLOYEE
+                                            </Form.Label>
+                                            <Col sm="3">
+                                                <Form.Control 
+                                                    ref="name"
+                                                    name="name"
+                                                    value={this.state.name}
+                                                    onChange={this.onChangeName}
+                                                    autoComplete="off"
+                                                    placeholder="-No Sales Employee-"
+                                                />
+                                            </Col>
+                                            <Col sm="1">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            PICK AND PACK REMARKS
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <Form.Control 
+                                                    ref="name"
+                                                    name="name"
+                                                    value={this.state.name}
+                                                    onChange={this.onChangeName}
+                                                    autoComplete="off"
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            JOURNAL REMARKS
+                                            </Form.Label>
+                                            <Col sm="3">
+                                                <Form.Control 
+                                                    as="textarea"
+                                                    rows={3}
+                                                    name="instructions"
+                                                    value={this.state.instructions}
+                                                />
+                                            </Col>
+                                            <Col sm="1">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            REMARKS
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <Form.Control 
+                                                    as="textarea"
+                                                    rows={3}
+                                                    name="instructions"
+                                                    value={this.state.instructions}
+                                                />
+                                            </Col>
+                                        </Form.Group>
+
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Col sm="10">
+                                                <ButtonToolbar>
+                                                    <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handlePrevClick}>OK</Button>
+                                                    &nbsp;&nbsp;
+                                                    <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleNextClick}>Cancel</Button>
+                                                </ButtonToolbar>
+                                            </Col>
+                                            <Col sm="2">
+                                                <ButtonToolbar>
+                                                    <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handlePrevClick}>Copy To</Button>
+                                                    &nbsp;&nbsp;
+                                                    <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleNextClick}>Inventory Transfer</Button>
+                                                </ButtonToolbar>
+                                            </Col>
+                                        </Form.Group>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col sm="4">
+                            <Card style={{background : "#f0fff9"}}>
+                                <Card.Body>
+
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        WITH DOWNPAYMENT?
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control as="select">
+                                                <option>No</option>
+                                                <option>Yes</option>
+                                            </Form.Control>
                                         </Col>
-                                    </Form.Group> */}
-                                </Form.Group>
-                            </Form>
-                        </Card.Body>
-                    </Card>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        WITH DOWNPAYMENT?
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control as="select">
+                                                <option>No</option>
+                                                <option>Yes</option>
+                                            </Form.Control>
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        PLATE NO:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        DRIVER:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        SEAL NO:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        HELPER:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        NATURE OF TRANSACTION:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        SPS CLEARANCE:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        COMMERCIAL INV:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        ORIGIN:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        PACKING SLIP:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        HEALTH CERTIFICATE:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        INSURANCE:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        BILL OF LADING:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        CONTAINER NUM:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        EXPORTED?:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        POS REF:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        STATUS:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        CHECK BY:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        RECEIVED BY:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        RETURN TO OA:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        CHECKED BY:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        APPROVED BY:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        ARRIVED IN PORT?:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        ITR TYPE:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        IT TYPE:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        DELIVERY TO STORE?:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        DOCUMENT ID:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        CONFIRMED:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        PULL OUT REASON:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        OUTLETS SM/WALTER OUTRIGHT:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control 
+                                                ref="name"
+                                                name="name"
+                                                value={this.state.name}
+                                                onChange={this.onChangeName}
+                                                autoComplete="off"
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                </Card.Body>
+                            </Card>                             
+                        </Col>
+                    </Form.Group>
+                    
                 </Container>
                 <NoserLoading show={this.state.isloading} />
-
                 <ListOfItems 
                     show={this.state.modalListOfItems}
                     onHide={this.handleModalCloseItems}
                 />
-                <ListOfWarehouse
+               <ListOfWarehouse
                     show={this.state.modalListOfWarehouse}
                     onHide={this.handleModalCloseWarehouse}
                 />
-               {/* <BatchNoSelection
-                    show={this.state.modalBatchNoSelection}
-                    onHide={this.handleModalClose}
-                /> */}
-               {/*  <BatchesSetup
-                    show={this.state.modalBatchSetup}
-                    onHide={this.handleModalClose}
-                /> */}
-
-                
             </div> 
         )
     }
