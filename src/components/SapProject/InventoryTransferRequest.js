@@ -3,7 +3,8 @@ import {
     paginationFactory,Button, ButtonToolbar, Card, 
     Form, Col, Row, axios, Container, Banner, Typeahead, TimePicker,
     cellEditFactory, Type, moment, NavLink, Alert, AppConfiguration,
-    NoserLoading, Noser, sizePerPageRenderer, DatePicker, Tabs, Tab
+    NoserLoading, Noser, sizePerPageRenderer, DatePicker, Tabs, Tab, 
+    Dropdown
 } 
 from '../../noser-hris-component';
 import { ArrowRight } from 'react-bootstrap-icons';
@@ -807,7 +808,17 @@ class InventoryTransferRequest extends Component {
                                             </Col>
                                             <Col sm="2">
                                                 <ButtonToolbar>
-                                                    <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handlePrevClick}>Copy To</Button>
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle  style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} id="dropdown-basic">
+                                                            COPY TO
+                                                        </Dropdown.Toggle>
+
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item href="#/action-1">Delivery</Dropdown.Item>
+                                                            <Dropdown.Item href="#/action-2">A/R Invoice</Dropdown.Item>
+                                                            <Dropdown.Item href="#/action-3">Res. Invoice</Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
                                                     &nbsp;&nbsp;
                                                     <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleNextClick}>Inventory Transfer</Button>
                                                 </ButtonToolbar>
