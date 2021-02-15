@@ -101,7 +101,7 @@ class ListOfWarehouse extends Component {
                 backdrop="static"
                 className="modal-90w"
                  >
-                <Modal.Header closeButton className="card-header">
+                <Modal.Header closeButton style={{background : "#ababac"}}>
                     <Modal.Title id="contained-modal-title-vcenter">
                         List Of Warehouses
                     </Modal.Title>
@@ -127,48 +127,26 @@ class ListOfWarehouse extends Component {
                                     />
                                 </Col>
                             </Form.Group>
-                            {/* <ToolkitProvider
-                                keyField="id"   
-                                data={ this.state.trainingRegisterTableList }
-                                columns={ trainingRegisterColumn }
-                                exportCSV={ {
-                                    fileName: "Attendance Sheets.csv",
-                                } }
-                                >
-                                {
-                                    props => (
-                                    <div> */}
-                                    <BootstrapTable
-                                        /* caption={Noser.TableHeader({title:"RECORD"})} */
-                                        keyField = "id"
-                                        data = { this.state.trainingRegisterTableList }
-                                        columns = { trainingRegisterColumn }
-                                        pagination={ paginationFactory({sizePerPageRenderer}) }
-                                        striped
-                                        hover
-                                        condensed
-                                        noDataIndication={ () => <div>No record found.</div> }
-    
-                                    />
-                                    {/* </div>
-                                    )
-                                }
-                            </ToolkitProvider> */}
+                            <BootstrapTable
+                                /* caption={Noser.TableHeader({title:"RECORD"})} */
+                                keyField = "id"
+                                data = { this.state.trainingRegisterTableList }
+                                columns = { trainingRegisterColumn }
+                                //pagination={ paginationFactory({sizePerPageRenderer}) }
+                                striped
+                                hover
+                                condensed
+                                noDataIndication={ () => <div>No record found.</div> }
 
+                            />
                         </Form>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
                     <ButtonToolbar >
-                        <Button variant="success"onClick={this.onModalClose}  className="ml-auto" >
-                            Choose
-                        </Button>&nbsp;&nbsp;
-                        <Button variant="danger" onClick={this.onModalClose} >
-                            Cancel
-                        </Button>&nbsp;&nbsp;
-                        <Button variant="success" onClick={this.onModalClose} >
-                            New
-                        </Button>
+                        <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.onModalClose}>Choose</Button>&nbsp;&nbsp;
+                        <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.onModalClose}>New</Button>&nbsp;&nbsp;
+                        <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.onModalClose}>Cancel</Button>
                     </ButtonToolbar>
                 </Modal.Footer>
                 <NoserLoading show={this.state.isloading} />

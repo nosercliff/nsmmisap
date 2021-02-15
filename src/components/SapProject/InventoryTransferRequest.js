@@ -597,6 +597,36 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            DUE DATE
+                                            </Form.Label>
+                                            <Col sm="4">
+                                                <DatePicker
+                                                    ref='documentDate'
+                                                    selected={this.state.documentDate}
+                                                    onChange={this.handleChangeDocumentDate}
+                                                    minDate={this.minDate}
+                                                    value={this.props.documentDate}
+                                                    dateFormat={"MM/dd/yyyy"}
+                                                    className="form-control"
+                                                />
+                                            </Col>
+                                        </Form.Group>
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            {/* <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                SHIP TO
+                                            </Form.Label> */}
+                                            <Col sm="2">
+                                            </Col>
+                                            <Col sm="3">
+                                               {/*  <Form.Control as="select">
+                                                    <option>select ship to </option>
+                                                    <option>Caloocan City</option>
+                                                    <option>Quezon City</option>
+                                                </Form.Control> */}
+                                            </Col>
+                                            <Col sm="1">
+                                            </Col>
+                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             DOCUMENT DATE
                                             </Form.Label>
                                             <Col sm="4">
