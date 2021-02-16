@@ -386,7 +386,7 @@ class SalesOrder extends Component {
                                                     value={this.state.name}
                                                     onChange={this.onChangeName}
                                                     autoComplete="off"
-                                                    readOnly
+                                                     readOnly 
                                                     
                                                 />
                                             </Col>
@@ -410,7 +410,7 @@ class SalesOrder extends Component {
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 DISCOUNT
-                                            </Form.Label>{/* 
+                                            </Form.Label>
                                             <Col sm="1">
                                                 <Form.Control 
                                                     ref="employeeNo"
@@ -420,11 +420,12 @@ class SalesOrder extends Component {
                                                     autoComplete="off"
                                                     readOnly
                                                 />
-                                            </Col> */} {/* 
-                                                <Form.Label style={{fontWeight : "bold"}}>
+                                            </Col>
+                                            <Form.Label column sm="1" style={{fontWeight : "bold"}}>
                                                 %
-                                                </Form.Label> */}
-                                            <Col sm="4">
+                                            </Form.Label>
+
+                                            <Col sm="2">
                                                 <Form.Control 
                                                     ref="employeeNo"
                                                     name="employeeNo"
@@ -442,7 +443,7 @@ class SalesOrder extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             FREIGHT
                                                 <Button style={{fontSize:'11px', textDecoration: "none",}}
-                                                    variant="link" onClick={()=>alert("test")}
+                                                    variant="link"
                                                 > <ArrowRight style={{color: "#f4d56e" }} size={20}/> <span style={{color: "#000000" }}>{}</span> 
                                                 </Button>
                                             </Form.Label> 
@@ -461,7 +462,9 @@ class SalesOrder extends Component {
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Col sm="6">
                                             </Col>
+                                            
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
                                                 ROUNDING
                                             </Form.Label>
                                             <Col sm="4">
