@@ -133,8 +133,8 @@ class Login extends Component {
         return (
             <div className="login-frm">
                 <Container className="mt-50">
-                    <Card>
-                        <Card.Header className='login-card'>Human Resource Information System</Card.Header>
+                    <Card style={{background : "#f0fff9"}}>
+                        <Card.Header style={{background : "#ababac"}}>Human Resource Information System</Card.Header>
                         <Card.Body>
                             <div>
                                 <Form >
@@ -163,7 +163,7 @@ class Login extends Component {
                                         onKeyDown={this.handleKeyDown}
                                         onChange={this.handleChange}/>
                                     <ButtonToolbar className="mt-3">
-                                        <Button variant="success" style={{minWidth:'60px'}} className="lg-button" type="button" onClick={this.handleSubmit}>
+                                        <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleSubmit}>
                                             Login
                                         </Button>
                                     </ButtonToolbar>
@@ -171,7 +171,7 @@ class Login extends Component {
                                 </Form>
                             </div>
                         </Card.Body>
-                        <Card.Footer>Noser HRIS © 2019-2020. All Rights Reserved</Card.Footer>
+                        <Card.Footer style={{color: "#000000"}}>Noser HRIS © 2019-2020. All Rights Reserved</Card.Footer>
                     </Card>
                 </Container>
                 <NoserLoading show={this.state.isloading} />
