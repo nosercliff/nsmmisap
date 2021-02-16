@@ -224,7 +224,7 @@ class ListOfItems extends Component {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <ButtonToolbar >
+                    <ButtonToolbar className="mr-auto">
                         <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.onModalClose}>Choose</Button>&nbsp;&nbsp;
                         <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.onModalClose}>New</Button>&nbsp;&nbsp;
                         <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.onModalClose}>Cancel</Button>
