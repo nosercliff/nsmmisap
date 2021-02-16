@@ -15,21 +15,23 @@ body{
 .navbar{
   /*background-color: #7B02EC;*/
   /*background-image: linear-gradient(to right,#7B02EC , #7C06B9);*/
-  background: transparent url("./icon/nav-gradient.jpg") repeat-x scroll 0% 0%;
+ /*  background: transparent url("./icon/nav-gradient.jpg") repeat-x scroll 0% 0%; */
   /*box-shadow: 0px 3px rgba(2, 99, 7, 0.589);*/
-  border-bottom: 2pt solid rgba(1, 43, 3, 0.589);
+/*   border-bottom: 2pt solid rgba(1, 43, 3, 0.589); */
+  background-color: #ababac;
+  border-bottom: 2pt solid #fcb913;
 }
 .navbar-brand{
-  color:#fff !important;
+  color:#000000 !important;
   font-weight: bold;
-  text-shadow: 4px 4px 10px #000000;
+  /* text-shadow: 4px 4px 10px #000000; */
 }
 .nav-link{
-  color:#fff !important;
+  color:#000000 !important;
   text-align: left;
   align-items: flex-end;
   font-weight: bold;
-  text-shadow: 4px 4px 10px #000000;
+  /* text-shadow: 4px 4px 10px #000000; */
 }
   /*.navbar-nav a:hover {
     color: #4f782d !important;
@@ -37,12 +39,13 @@ body{
 .nav-link.active,
 .nav-item.show .nav-link {
   /*background:rgba(0,0,0,0.5);*/
-  background:rgb(8, 139, 30);
+  /* background:rgb(8, 139, 30); */
+  background-color: #828288;
 }
 nav .dropdown-menu{
   opacity: 0.9;
   /*background:rgba(0,0,0,0.5);*/
-  background:rgb(8, 139, 30);
+ background-color: #ababac;
   opacity: 0.8;
   filter: alpha(opacity=30);
   text-align: left;
@@ -53,7 +56,7 @@ nav .dropdown-menu{
 }
 nav .dropdown-menu a{
   text-align: left;
-  color:white !important; 
+  color:#000000 !important;
   font-weight: bold;
   text-shadow: 4px 4px 10px #000000;
 }
@@ -97,19 +100,19 @@ legend{
 }
 .nav-tabs a:hover{
   /*background-color: rgb(8, 139, 30) !important;*/
-    border-radius: 1pt solid rgb(8, 139, 30) !important;
+  border: .5pt solid #ababac !important;
     color:#000;
 }
 
 .nav-tabs > .nav-link{
-  border-radius: 1pt solid rgb(8, 139, 30) !important;
-  background-color: rgb(3, 77, 15) !important;
+  border: .5pt solid #56565c !important;
+  background-color: #ababac !important;
   margin: 0 0 0 1px;
 }
 .nav-link.active {
-  border-radius: 1pt solid rgb(8, 139, 30) !important;
-  background-color: rgb(8, 139, 30) !important;
-  box-shadow: 0 6px rgb(8, 139, 30);
+  border-radius: 1pt solid  #6a6a6e !important;
+  border: .5pt solid #545457 !important;
+  box-shadow: 0 6px #6a6a6e;
 }
 /*MODAL FOR LOADING*/
 .noser-modal {
@@ -183,13 +186,14 @@ legend{
   padding-top: 4px!important;
   padding-bottom: 4px!important;
   /*white-space: nowrap!important;*/
+  background-color: #ffffff;
 }
 .table th{
   padding-top: 6px!important;
   padding-bottom: 6px!important;
   /*background-color: #28A745!important;*/
-  background-color:  rgb(8, 139, 30);
-  color:#fff !important;
+  background-color: #e5e5e5;
+  color:#000000 !important;
   /*white-space: nowrap !important;*/
 }
 .btn-success{
@@ -198,7 +202,7 @@ legend{
 }
 
 .card{
-  border: .5pt solid rgba(17, 99, 31, 0.644) !important;
+  border: .5pt solid #6c6c70 !important;
   background: transparent;
 }
 .card-login{
@@ -208,9 +212,8 @@ legend{
 .card-header{
   background-image: linear-gradient(to right,rgba(13, 88, 17, 0.986) , rgb(8, 139, 30));
   /*color: rgba(13, 88, 17, 0.986);*/
-  color: #fff;
+  color: #000000;
   text-shadow: 4px 4px 10px #000;
-  font-weight: bold;
   /*border: 2pt solid rgba(13, 88, 17, 0.986) !important;*/
   border: none !important;
   min-height: 36px;
@@ -258,7 +261,7 @@ legend{
     margin: 18% auto 0 auto;
   }
   body{
-    background-image: url('icon/bgcorner.png');
+    background-color: #f0fff9;
     background-position: top left;
     background-repeat: no-repeat;
   }
@@ -267,13 +270,13 @@ legend{
   .lg-button { width: 100% !important;display: block !important;}  
   .card{margin-top: 45%;}
   .noser-home{
-    background-image: url('icon/logo-0.png');
+    background-color: #f0fff9;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
   }
   body{
-    background-image: url('icon/bgcornersmall.png');
+    background-color: #f0fff9;
     background-position: top left;
     background-repeat: no-repeat;
   }
