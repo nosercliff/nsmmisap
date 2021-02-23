@@ -1,7 +1,7 @@
 import {
     React,Component, CipherString, Button, ButtonToolbar, Card, 
     Form, Col, axios, Alert, AppConfiguration,
-    NoserLoading, Redirect, Container, NavLink
+    NoserLoading, Redirect, Container, NavLink, Row
 } 
 from '../../noser-hris-component';
 
@@ -15,6 +15,7 @@ class Login extends Component {
             referrer: null,
             username: "",
             password: "",
+            //company: "",
             loginErrors: "",
             clientId:"",
             userId:"",
@@ -100,7 +101,6 @@ class Login extends Component {
         .post(AppConfiguration.Setting().noserapiendpoint + "Administrator/GetUserAccess", params)
         .then(res => {
           const data = res.data
-          
           this.setState({
               isloading   :   false,
               alerttype   :   data.status=="1" ? "Success!" : "Error!",
@@ -132,9 +132,9 @@ class Login extends Component {
         } 
         return (
             <div className="login-frm">
-                <Container className="mt-50">
-                    <Card style={{background : "#f0fff9"}}>
-                        <Card.Header style={{background : "#ababac"}}>Human Resource Information System</Card.Header>
+                <Container className="mt-50" >
+                    <Card style={{background : "#f0fff9" }}>
+                        <Card.Header style={{background : "#ababac", border: "1px solid #000000",}}>Noser SAP Web Interface</Card.Header>
                         <Card.Body>
                             <div>
                                 <Form >
@@ -144,34 +144,68 @@ class Login extends Component {
                                             {this.state.message}
                                         </Alert>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formGridEmail">
-                                    <Form.Control 
-                                        type="text" 
-                                        placeholder="Username"
-                                        autoComplete="off" 
-                                        name="username"
-                                        value={this.state.username}
-                                        onChange={this.handleChange}/>
+                                
+                                <Form.Group as={Row} controlId="formGridPassword">
+                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                        User ID:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control 
+                                            type="text" 
+                                            autoComplete="off" 
+                                            name="username"
+                                            value={this.state.username}
+                                            onChange={this.handleChange}/>
+                                    </Col>
+                                    <Col sm="3">
+                                    </Col>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formGridPassword">
-                                    <Form.Control 
-                                        type="password" 
-                                        placeholder="Password" 
-                                        autoComplete="off" 
-                                        name="password"
-                                        value={this.state.password}
-                                        onKeyDown={this.handleKeyDown}
-                                        onChange={this.handleChange}/>
-                                    <ButtonToolbar className="mt-3">
-                                        <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleSubmit}>
-                                            Login
-                                        </Button>
-                                    </ButtonToolbar>
+
+                                 <Form.Group as={Row} controlId="formGridPassword">
+                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                        Password:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control 
+                                            type="password" 
+                                            autoComplete="off" 
+                                            name="password"
+                                            value={this.state.password}
+                                            onKeyDown={this.handleKeyDown}
+                                            onChange={this.handleChange}/>
+                                    </Col>
+                                    <Col sm="3">
+                                    </Col>
                                 </Form.Group>
+
+                                 <Form.Group as={Row} controlId="formGridPassword">
+                                    <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                        Company:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control 
+                                            type="text" 
+                                            autoComplete="off" 
+                                            name="company"
+                                            value={this.state.company}
+                                            onChange={this.handleChange}/>
+                                    </Col>
+                                    <Col sm="3">
+                                    </Col>
+                                </Form.Group>
+
+                                <ButtonToolbar className="mt-5">
+                                    <Button className="ml-auto" style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleSubmit}>
+                                        OK
+                                    </Button>&nbsp;&nbsp;
+                                    <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} /* onClick={this.handleSubmit} */>
+                                        Exit
+                                    </Button>
+                                </ButtonToolbar>
                                 </Form>
                             </div>
                         </Card.Body>
-                        <Card.Footer style={{color: "#000000"}}>Noser HRIS © 2019-2020. All Rights Reserved</Card.Footer>
+                        <Card.Footer style={{color: "#000000"}}>Noser SAP Web Interface © 2019-2020. All Rights Reserved</Card.Footer>
                     </Card>
                 </Container>
                 <NoserLoading show={this.state.isloading} />

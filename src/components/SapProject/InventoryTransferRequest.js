@@ -11,6 +11,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 
 import ListOfItems from './sapModal/ListOfItems'
 import ListOfWarehouse from './sapModal/ListOfWarehouse';
+import BusinessPartnerModal from './sapModal/BusinessPartnerModal';
 
  
 class InventoryTransferRequest extends Component {
@@ -27,12 +28,13 @@ class InventoryTransferRequest extends Component {
 
             DataTmp:[],
             wareHouseData:[],
-            businessPartner: "",
+            BPName: "",
             Name:"",
             Warehouses:"",
             unknownData: "",
             modalListOfItems: false,
             modalListOfWarehouse: false,
+            modalBusinessPartner: false,
 
             postingDate : new Date(),
             documentDate : new Date(),
@@ -79,7 +81,7 @@ class InventoryTransferRequest extends Component {
         for (let i = 0; i < itemUsersDataLists.length; i++) {
             let obj = {
                 'id'                :   itemUsersDataLists[i]['id'].replace(" '","").replace("'",""),
-                'businessPartner'   :   itemUsersDataLists[i]['businessPartner'].replace(" '","").replace("'",""),
+                'BPName'            :   itemUsersDataLists[i]['BPName'].replace(" '","").replace("'",""),
                 'Name'              :   itemUsersDataLists[i]['Name'].replace(" '","").replace("'",""),
                 'isDeleted'         :   itemUsersDataLists[i]['isDeleted'].replace(" '","").replace("'",""),
                 'isModified'        :   itemUsersDataLists[i]['isModified'].replace(" '","").replace("'",""),
@@ -134,7 +136,7 @@ class InventoryTransferRequest extends Component {
         //console.log("object")
             let obj = {
                 "id"                :   idList[i],
-                "businessPartner"   :   businessPartnerList[i],
+                "BPName"            :   businessPartnerList[i],
                 "Name"              :   NameList[i],
                 "isDeleted"         :   isDeletedList[i],
                 "isModified"        :   isModifiedList[i],
@@ -243,17 +245,18 @@ class InventoryTransferRequest extends Component {
             this.businessPartner = ""
             return
         }
-       this.state.businessPartner = e[0].businessPartner
+       this.state.BPName = e[0].businessPartner
+       //this.onChangeName();
        
        //console.log(this.state.businessPartner + " :businessPartner")
     }
 
     onChangeName= (e) =>{
-        if(e.length == 0){
+        /* if(e.length == 0){
             this.Name = ""
             return
         }
-       this.state.Name = e[0].name
+       this.state.Name = e[0].Name */
        //console.log(this.state.businessPartner + " :businessPartner")
     }
 
@@ -291,6 +294,12 @@ class InventoryTransferRequest extends Component {
         })
     }
 
+    handleShowBusiPartner = ()=>{
+        this.setState({
+            modalBusinessPartner:   true
+        })
+    }
+
     handleModalCloseItems = (e) =>{
         this.setState({
             modalListOfItems:   false,
@@ -300,6 +309,12 @@ class InventoryTransferRequest extends Component {
     handleModalCloseWarehouse = (e) =>{
         this.setState({
             modalListOfWarehouse: false,
+        })
+    }
+
+    handleModalBusiPArt = (e) =>{
+        this.setState({
+            modalBusinessPartner: false,
         })
     }
 
@@ -484,9 +499,15 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 BUSINESS PARTNER
                                             </Form.Label>
+                                            <Col sm="1">
+                                                <Button style={{fontSize:'11px', textDecoration: "none"}}
+                                                    variant="link" onClick={this.handleShowBusiPartner}> 
+                                                    <ArrowRight style={{color: "#f4d56e" }} size={20}/> <span style={{color: "#000000" }}></span> 
+                                                </Button>
+                                            </Col>
                                             <Col sm="3">
                                                 <Typeahead
-                                                    labelKey='businessPartner'
+                                                    labelKey='BPName'
                                                     id="basic-example"
                                                     onChange={this.onChangeBusinessPartner}
                                                     options={this.state.DataTmp}
@@ -510,7 +531,7 @@ class InventoryTransferRequest extends Component {
                                                     placeholder="Primary"
                                                 />
                                             </Col>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Form.Control 
                                                     ref="employeeNo"
                                                     name="employeeNo"
@@ -526,12 +547,15 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 NAME
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
-                                                <Typeahead 
+                                                <Form.Control  
                                                     labelKey='Name'
                                                     id="basic-example"
                                                     onChange={this.onChangeName}
-                                                    options={this.state.DataTmp}
+                                                    value={this.state.employeeNo}
+                                                    //options={this.state.unknownData}
                                                     autoComplete="off"
                                                     readOnly
                                                 />
@@ -541,7 +565,7 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 STATUS
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Form.Control 
                                                     ref="employeeNo"
                                                     name="employeeNo"
@@ -557,6 +581,8 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 CONTACT PERSON
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
                                                 <Form.Control 
                                                     ref="name"
@@ -571,7 +597,7 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             POSTING DATE
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <DatePicker
                                                     ref='postingDate'
                                                     selected={this.state.postingDate}
@@ -588,6 +614,8 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 SHIP TO
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
                                                 <Form.Control as="select">
                                                     <option>select ship to </option>
@@ -600,7 +628,7 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             DUE DATE
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <DatePicker
                                                     ref='documentDate'
                                                     selected={this.state.documentDate}
@@ -627,10 +655,12 @@ class InventoryTransferRequest extends Component {
                                             </Col>
                                             <Col sm="1">
                                             </Col>
+                                            <Col sm="1">
+                                            </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             DOCUMENT DATE
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <DatePicker
                                                     ref='documentDate'
                                                     selected={this.state.documentDate}
@@ -646,10 +676,12 @@ class InventoryTransferRequest extends Component {
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Col sm="6">
                                             </Col>
+                                            <Col sm="1">
+                                            </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             REFERENCED DOCUMENT
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                             <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleEmpAdd}>
                                                 ...
                                             </Button>
@@ -660,10 +692,12 @@ class InventoryTransferRequest extends Component {
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Col sm="6">
                                             </Col>
+                                            <Col sm="1">
+                                            </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 FROM WAREHOUSE
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Typeahead
                                                     labelKey='whse'
                                                     id="basic-example"
@@ -678,10 +712,12 @@ class InventoryTransferRequest extends Component {
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Col sm="6">
                                             </Col>
+                                            <Col sm="1">
+                                            </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                 TO WAREHOUSE
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Typeahead
                                                     labelKey='whse'
                                                     id="basic-example"
@@ -698,12 +734,14 @@ class InventoryTransferRequest extends Component {
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             PRICE LIST
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
                                                 <Form.Control as="select">
                                                     <option>select price list</option>
                                                     <option>Last Purchase Price</option>
                                                 </Form.Control>
-                                            </Col>
+                                            </Col> 
                                         </Form.Group>
                                         <Card  className="mt-5" style={{background : "#f0fff9"}}>
                                             <Card.Body>
@@ -1271,9 +1309,13 @@ class InventoryTransferRequest extends Component {
                     show={this.state.modalListOfItems}
                     onHide={this.handleModalCloseItems}
                 />
-               <ListOfWarehouse
+                <ListOfWarehouse
                     show={this.state.modalListOfWarehouse}
                     onHide={this.handleModalCloseWarehouse}
+                />
+                <BusinessPartnerModal
+                    show={this.state.modalBusinessPartner}
+                    onHide={this.handleModalBusiPArt}
                 />
             </div> 
         )

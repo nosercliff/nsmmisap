@@ -269,9 +269,10 @@ import EmployeeFinalsPayCreate from './components/Training/Admin/EmployeeFinalsP
 */
 
 // SAP START
-import InventoryTransferRequest from './components/SapProject/InventoryTransferRequest'
-import InventoryTransfer from './components/SapProject/InventoryTransfer'
-import SalesOrder from './components/SapProject/SalesOrder'
+import InventoryTransferRequest from './components/SapProject/InventoryTransferRequest';
+import InventoryTransfer from './components/SapProject/InventoryTransfer';
+import SalesOrder from './components/SapProject/SalesOrder';
+import BPMasterData from './components/SapProject/BPMasterData';
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -295,6 +296,7 @@ class App extends Component {
                         <ProtectedRoute path="/InventoryTransferRequest" exact component={InventoryTransferRequest}/>
                         <ProtectedRoute path="/InventoryTransfer" exact component={InventoryTransfer}/>
                         <ProtectedRoute path="/SalesOrder" exact component={SalesOrder}/>
+                        <ProtectedRoute path="/BPMasterData" exact component={BPMasterData}/>
 
                         <Route path="*" component={Unathorized}/>
                         
