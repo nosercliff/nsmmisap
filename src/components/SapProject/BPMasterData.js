@@ -41,7 +41,7 @@ class BPMasterData extends Component {
                 <Container className="mt-5" fluid>
                     <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                         <Col sm="8">
-                            <Card style={{background : "#f0fff9"}}>
+                            <Card style={{background : "#FFF4F4"}}>
                                 <Card.Header style={{background : "#ababac"}}>BUSINESS PARTNER MASTER DATA</Card.Header>
                                 <Card.Body>
                                     <Form>
@@ -51,42 +51,121 @@ class BPMasterData extends Component {
                                         </Alert>   
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            <Form.Label column sm="1" style={{fontWeight : "bold"}}>
                                                 CODE
                                             </Form.Label>
+                                            <Col sm="2">
+                                                <Form.Control as="select">
+                                                    <option>Manual</option>
+                                                    <option></option>
+                                                    <option></option>
+                                                </Form.Control>
+                                            </Col>
+                                            <Col sm="2">
+                                                <Form.Control 
+                                                    ref="name"
+                                                    name="name"
+                                                    value={this.state.name}
+                                                    onChange={this.onChangeName}
+                                                    autoComplete="off"
+                                                />
+                                            </Col>
+                                            <Col sm="2">
+                                                <Form.Control as="select">
+                                                    <option>Customer</option>
+                                                    <option></option>
+                                                    <option></option>
+                                                </Form.Control>
+                                            </Col>
+                                            <Col sm="5">
+                                            </Col>
+
                                         </Form.Group>
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            <Form.Label column sm="1" style={{fontWeight : "bold"}}>
                                                 NAME
                                             </Form.Label>
+                                            <Col sm="2">
+                                            </Col>
+                                            <Col sm="4">
+                                                <Form.Control 
+                                                    ref="name"
+                                                    name="name"
+                                                    value={this.state.name}
+                                                    onChange={this.onChangeName}
+                                                    autoComplete="off"
+                                                />
+                                            </Col>
+                                            <Col sm="5">
+                                            </Col>
                                         </Form.Group>
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            <Form.Label column sm="3" style={{fontWeight : "bold"}}>
                                                 FOREIGN NAME
                                             </Form.Label>
+                                            <Col sm="4">
+                                                <Form.Control 
+                                                    ref="name"
+                                                    name="name"
+                                                    value={this.state.name}
+                                                    onChange={this.onChangeName}
+                                                    autoComplete="off"
+                                                />
+                                            </Col>
+                                            <Col sm="5">
+                                            </Col>
                                         </Form.Group>
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            <Form.Label column sm="3" style={{fontWeight : "bold"}}>
                                                 GROUP
                                             </Form.Label>
+                                            <Col sm="4">
+                                                <Form.Control as="select">
+                                                    <option>Affiliates</option>
+                                                    <option></option>
+                                                    <option></option>
+                                                </Form.Control>
+                                            </Col>
+                                            <Col sm="5">
+                                            </Col>
                                         </Form.Group>
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            <Form.Label column sm="3" style={{fontWeight : "bold"}}>
                                                 CURRENCY
                                             </Form.Label>
+                                            <Col sm="4">
+                                                <Form.Control as="select">
+                                                    <option>Philippine Peso</option>
+                                                    <option></option>
+                                                    <option></option>
+                                                </Form.Control>
+                                            </Col>
+                                            <Col sm="5">
+                                            </Col>
                                         </Form.Group>
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                            <Form.Label column sm="3" style={{fontWeight : "bold"}}>
                                                 FEDERAL TAX ID
                                             </Form.Label>
+                                            <Col sm="4">
+                                                <Form.Control 
+                                                    ref="name"
+                                                    name="name"
+                                                    value={this.state.name}
+                                                    onChange={this.onChangeName}
+                                                    autoComplete="off"
+                                                />
+                                            </Col>
+                                            <Col sm="5">
+                                            </Col>
                                         </Form.Group>
 
-                                        <Card  className="mt-5" style={{background : "#f0fff9"}}>
+                                        <Card  className="mt-5" style={{background : "#FFF4F4", border: '1px solid "#ababac"'}} >
                                             <Card.Body>
                                                 <Tabs defaultActiveKey="default" transition={false} id="noanim-tab-example">
                                                     <Tab eventKey="default" title="General">
@@ -107,7 +186,7 @@ class BPMasterData extends Component {
                                                 </Tabs>
                                             </Card.Body>
                                         </Card>
-                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Group as={Row}className="mt-5" controlId="formPlaintextEmail">
                                             <Col sm="10">
                                                 <ButtonToolbar>
                                                     <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handlePrevClick}>Add</Button>
@@ -327,7 +406,7 @@ class BPMasterData extends Component {
                                         LOCATION GROUP
                                         </Form.Label>
                                         <Col sm="7">
-                                        <Form.Control as="select">
+                                            <Form.Control as="select">
                                                 <option></option>
                                                 <option>location 1</option>
                                                 <option>location 2</option>
