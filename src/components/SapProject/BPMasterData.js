@@ -215,7 +215,7 @@ class BPMasterData extends Component {
                             </Card>
                         </Col>
                         <Col sm="4">
-                            <Card style={{background : "#f0fff9"}}>
+                            <Card style={{background : "#FFF4F4"}}>
                                 <Card.Body>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
