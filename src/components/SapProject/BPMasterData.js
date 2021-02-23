@@ -89,7 +89,7 @@ class BPMasterData extends Component {
                                         <Card  className="mt-5" style={{background : "#f0fff9"}}>
                                             <Card.Body>
                                                 <Tabs defaultActiveKey="default" transition={false} id="noanim-tab-example">
-                                                    <Tab eventKey="default" title="Contents">
+                                                    <Tab eventKey="default" title="General">
                                                     <Form.Label style={{fontWeight : "bold"}}>
                                                         test
                                                     </Form.Label>
