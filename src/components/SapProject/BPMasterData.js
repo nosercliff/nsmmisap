@@ -615,10 +615,15 @@ class BPMasterData extends Component {
                                                     </Form.Group>
 
                                                     <Form.Group as={Row} controlId="formPlaintextEmail">
-                                                        <Form.Check type="radio" aria-label="radio 1" />
-                                                        <Form.Label column sm="1" style={{fontWeight : "bold"}}>
-                                                            Active
-                                                        </Form.Label>
+                                                        <Col sm="1">
+                                                            <Form.Check 
+                                                                className='mt-1'
+                                                                style={{fontWeight : "bold"}}
+                                                                type='checkbox'
+                                                                id='checkbox'
+                                                                label='Active'
+                                                            />
+                                                        </Col>
                                                         <Form.Label column sm="1" style={{fontWeight : "bold"}}>
                                                             From
                                                         </Form.Label>
@@ -650,7 +655,7 @@ class BPMasterData extends Component {
                                                         <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                                             Remarks
                                                         </Form.Label>
-                                                        <Col sm="2">
+                                                        <Col sm="3">
                                                             <Form.Control 
                                                                 ref="name"
                                                                 name="name"
@@ -662,17 +667,25 @@ class BPMasterData extends Component {
                                                     </Form.Group>
 
                                                     <Form.Group as={Row} controlId="formPlaintextEmail">
-                                                        <Form.Check type="radio" aria-label="radio 1" />
-                                                        <Form.Label column sm="3" style={{fontWeight : "bold"}}>
-                                                            Inactive
-                                                        </Form.Label>
+                                                        <Col sm="12">
+                                                            <Form.Check 
+                                                                style={{fontWeight : "bold"}}
+                                                                type='checkbox'
+                                                                id='checkbox'
+                                                                label='Inactive'
+                                                            />
+                                                        </Col>
                                                     </Form.Group>
 
                                                     <Form.Group as={Row} controlId="formPlaintextEmail">
-                                                        <Form.Check type="radio" aria-label="radio 1" />
-                                                        <Form.Label column sm="3" style={{fontWeight : "bold"}}>
-                                                            Advance
-                                                        </Form.Label>
+                                                        <Col sm="12">
+                                                            <Form.Check 
+                                                                style={{fontWeight : "bold"}}
+                                                                type='checkbox'
+                                                                id='checkbox'
+                                                                label='Advance'
+                                                            />
+                                                        </Col>
                                                     </Form.Group>
 
                                                     </Tab>
