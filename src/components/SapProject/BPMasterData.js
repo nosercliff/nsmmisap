@@ -218,7 +218,7 @@ class BPMasterData extends Component {
                                         <Card  className="mt-5" style={{background : "#f0fff9", border: '1px solid "#ababac"'}} >
                                             <Card.Body>
                                                 <Tabs defaultActiveKey="default" transition={false} id="noanim-tab-example">
-                                                    <Tab eventKey="General" title="General">
+                                                    <Tab eventKey="default" title="General">
                                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                                         <Form.Label column sm="1" style={{fontWeight : "bold"}}>
                                                             Tel 1
@@ -603,10 +603,14 @@ class BPMasterData extends Component {
                                                         </Form.Label>
                                                         <Col sm="3">
                                                         </Col>
-                                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                                                            Block Sending Marketing Content
-                                                        </Form.Label>
+                                                        <Col sm='5'>
+                                                            <Form.Check 
+                                                                style={{fontWeight : "bold"}}
+                                                                type='radio'
+                                                                id='radio'
+                                                                label='Block Sending Marketing Content'
+                                                            />
+                                                        </Col>
                                                         <Col sm="1">
                                                         <Button style={{minWidth:'40px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}}>
                                                             ...
@@ -708,7 +712,7 @@ class BPMasterData extends Component {
                                                     </Tab>
 
 
-                                                    <Tab eventKey="default" title="Payment Terms">
+                                                    <Tab eventKey="PaymentTerms" title="Payment Terms">
                                                         <Form.Group as={Row} className="mt-5" controlId="formPlaintextEmail">
                                                             <Form.Label column sm="3" style={{fontWeight : "bold"}}>
                                                                 Payment Terms
@@ -1234,7 +1238,7 @@ class BPMasterData extends Component {
                                                             </Form.Label>
                                                              <Col sm="1">
                                                             </Col>
-                                                            <Col sm="3">
+                                                            <Col sm="2">
                                                                 <DatePicker
                                                                     ref='documentDate'
                                                                     selected={this.state.documentDate}
@@ -1245,7 +1249,7 @@ class BPMasterData extends Component {
                                                                     className="form-control"
                                                                 />
                                                             </Col>
-                                                            <Col sm="5">
+                                                            <Col sm="6">
                                                             </Col>
                                                         </Form.Group>
                                                     </Tab>
@@ -1537,7 +1541,93 @@ class BPMasterData extends Component {
                                                     <Tab eventKey="properties" title="Properties"> </Tab>
                                                     <Tab eventKey="remarks" title="Remarks"> </Tab>
                                                     <Tab eventKey="sttachments" title="Attachments"> </Tab>
-                                                    <Tab eventKey="edocs" title="eDocs"> </Tab>
+                                                    <Tab eventKey="edocs" title="eDocs">
+                                                        <Card  className="mt-5" style={{background : "#f0fff9", border: '1px solid "#ababac"'}} >
+                                                            <Card.Body>
+                                                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                                    <Form.Label column sm="12" style={{fontWeight : "bold"}}>
+                                                                        <u>Generic eDoc Protocol</u>
+                                                                    </Form.Label>
+                                                                </Form.Group>
+
+                                                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                                    <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                                                        Default eDoc Generation Type
+                                                                    </Form.Label>
+                                                                    <Col sm='2'>
+                                                                    </Col>
+                                                                    <Col sm='5'>
+                                                                        <Form.Control 
+                                                                            ref="name"
+                                                                            name="name"
+                                                                            value={this.state.name}
+                                                                            onChange={this.onChangeName}
+                                                                            autoComplete="off"
+                                                                        />
+                                                                    </Col>
+                                                                </Form.Group>
+                                                                <div style={{height: '40px'}}></div>
+
+                                                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                                    <Form.Label column sm="12" style={{fontWeight : "bold"}}>
+                                                                        <u>PEPPOL</u>
+                                                                    </Form.Label>
+                                                                </Form.Group>
+
+                                                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                                    <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                                                        Default eDoc Generation Type
+                                                                    </Form.Label>
+                                                                    <Col sm='2'>
+                                                                    </Col>
+                                                                    <Col sm='5'>
+                                                                        <Form.Control 
+                                                                            ref="name"
+                                                                            name="name"
+                                                                            value={this.state.name}
+                                                                            onChange={this.onChangeName}
+                                                                            autoComplete="off"
+                                                                        />
+                                                                    </Col>
+                                                                </Form.Group>
+
+                                                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                                    <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                                                        Vat Structure
+                                                                    </Form.Label>
+                                                                    <Col sm='2'>
+                                                                    </Col>
+                                                                    <Col sm='5'>
+                                                                        <Form.Control 
+                                                                            ref="name"
+                                                                            name="name"
+                                                                            value={this.state.name}
+                                                                            onChange={this.onChangeName}
+                                                                            autoComplete="off"
+                                                                        />
+                                                                    </Col>
+                                                                </Form.Group>
+
+                                                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                                    <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                                                        Participant ID
+                                                                    </Form.Label>
+                                                                    <Col sm='2'>
+                                                                    </Col>
+                                                                    <Col sm='5'>
+                                                                        <Form.Control 
+                                                                            ref="name"
+                                                                            name="name"
+                                                                            value={this.state.name}
+                                                                            onChange={this.onChangeName}
+                                                                            autoComplete="off"
+                                                                        />
+                                                                    </Col>
+                                                                </Form.Group>
+
+                                                            </Card.Body>
+                                                        </Card>
+                                                    </Tab>
 
                                                 </Tabs>
                                             </Card.Body>
