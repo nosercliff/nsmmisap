@@ -11,6 +11,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 
 import ListOfItems from './sapModal/ListOfItems'
 import ListOfWarehouse from './sapModal/ListOfWarehouse';
+import BusinessPartnerModal from './sapModal/BusinessPartnerModal';
 
  
 class InventoryTransfer extends Component {
@@ -61,94 +62,95 @@ class InventoryTransfer extends Component {
 
     GetBusinessPartnerData(){
 
-    let filter_data = {}
-    
-    const getParams = {
-        "_collection" : "BusinessPartner",
-        "filter_data" : filter_data
-        }
-        axios
-        .post("http://134.209.99.190:8088/action/get" , getParams)
-        .then(res => {
-        const data = res.data
-        //console.log("Start SAP data")
-        //console.log(data["BusinessPartner"])
-        //console.log("End SAP data")
-        const itemUsersDataLists = this.buildList(data["BusinessPartner"])
-        let SapList =[]
-        for (let i = 0; i < itemUsersDataLists.length; i++) {
-            let obj = {
-                'id'                :   itemUsersDataLists[i]['id'].replace(" '","").replace("'",""),
-                'businessPartner'   :   itemUsersDataLists[i]['businessPartner'].replace(" '","").replace("'",""),
-                'Name'              :   itemUsersDataLists[i]['Name'].replace(" '","").replace("'",""),
-                'isDeleted'         :   itemUsersDataLists[i]['isDeleted'].replace(" '","").replace("'",""),
-                'isModified'        :   itemUsersDataLists[i]['isModified'].replace(" '","").replace("'",""),
-                'isDraft'           :   itemUsersDataLists[i]['isDraft'].replace(" '","").replace("'",""),
-                'createdby'         :   itemUsersDataLists[i]['createdby'].replace(" '","").replace("'",""),
-                'createddate'       :   itemUsersDataLists[i]['createddate'].replace(" '","").replace("'",""),
-                'modifiedby'        :   itemUsersDataLists[i]['modifiedby'].replace(" '","").replace("'",""),
-                'modifieddate'      :   itemUsersDataLists[i]['modifieddate'].replace(" '","").replace("'",""),
-            }
-            SapList.push(obj)
-        }
-        this.setState({DataTmp : SapList})
-        })
-        .catch(error=>{
-            console.log("error: " + error)
-        })
-    }
-
-    buildList = (data) => {
-
-        let itemList =[]
+        let filter_data = {}
         
-        let idList                  =[]
-        let businessPartnerList     =[]
-        let NameList                =[]
-        let isDeletedList           =[]
-        let isModifiedList          =[]
-        let isDraftList             =[]
-        let createdbyList           =[]
-        let createddateList         =[]
-        let modifiedbyList          =[]
-        let modifieddateList        =[]
-    
-        for (let i = 0; i < data.length; i++) {
-
-            let s1 = data[i].split(",")
-            let idClean = s1[0].replace("ObjectId(","").replace(")","").replace("{","")
-            let modifiedClean = s1[8].replace("}","")
-            idList.push(idClean.split(":")[1])
-            businessPartnerList.push(s1[1].split(":")[1])
-            NameList.push(s1[2].split(":")[1])
-            isDeletedList.push(s1[3].split(":")[1])
-            isModifiedList.push(s1[4].split(":")[1])
-            isDraftList.push(s1[5].split(":")[1])
-            createdbyList.push(s1[6].split(":")[1])
-            createddateList.push(s1[7].split(":")[1])
-            modifiedbyList.push(s1[8].split(":")[1])
-            modifieddateList.push(modifiedClean.split(":")[1])
-
-        }
-        for (let i = 0; i < idList.length; i++) {
-        //console.log("object")
-            let obj = {
-                "id"                :   idList[i],
-                "businessPartner"   :   businessPartnerList[i],
-                "Name"              :   NameList[i],
-                "isDeleted"         :   isDeletedList[i],
-                "isModified"        :   isModifiedList[i],
-                "isDraft"           :   isDraftList[i],
-                "createdby"         :   createdbyList[i],
-                "createddate"       :   createddateList[i],
-                "modifiedby"        :   modifiedbyList[i],
-                "modifieddate"      :   modifieddateList[i],
-            
+        const getParams = {
+            "_collection" : "BusinessPartner",
+            "filter_data" : filter_data
             }
-            itemList.push(obj)
+            axios
+            .post("http://134.209.99.190:8088/action/get" , getParams)
+            .then(res => {
+            const data = res.data
+            //console.log("Start SAP data")
+            //console.log(data["BusinessPartner"])
+            //console.log("End SAP data")
+            const itemUsersDataLists = this.buildList(data["BusinessPartner"])
+            let SapList =[]
+            for (let i = 0; i < itemUsersDataLists.length; i++) {
+                let obj = {
+                    'id'                :   itemUsersDataLists[i]['id'].replace(" '","").replace("'",""),
+                    'BPName'            :   itemUsersDataLists[i]['BPName'].replace(" '","").replace("'",""),
+                    'Name'              :   itemUsersDataLists[i]['Name'].replace(" '","").replace("'",""),
+                    'isDeleted'         :   itemUsersDataLists[i]['isDeleted'].replace(" '","").replace("'",""),
+                    'isModified'        :   itemUsersDataLists[i]['isModified'].replace(" '","").replace("'",""),
+                    'isDraft'           :   itemUsersDataLists[i]['isDraft'].replace(" '","").replace("'",""),
+                    'createdby'         :   itemUsersDataLists[i]['createdby'].replace(" '","").replace("'",""),
+                    'createddate'       :   itemUsersDataLists[i]['createddate'].replace(" '","").replace("'",""),
+                    'modifiedby'        :   itemUsersDataLists[i]['modifiedby'].replace(" '","").replace("'",""),
+                    'modifieddate'      :   itemUsersDataLists[i]['modifieddate'].replace(" '","").replace("'",""),
+                }
+                SapList.push(obj)
+            }
+            this.setState({DataTmp : SapList})
+            })
+            .catch(error=>{
+                console.log("error: " + error)
+            })
         }
-        return itemList
-    };
+    
+        buildList = (data) => {
+    
+            let itemList =[]
+            
+            let idList                  =[]
+            let businessPartnerList     =[]
+            let NameList                =[]
+            let isDeletedList           =[]
+            let isModifiedList          =[]
+            let isDraftList             =[]
+            let createdbyList           =[]
+            let createddateList         =[]
+            let modifiedbyList          =[]
+            let modifieddateList        =[]
+        
+            for (let i = 0; i < data.length; i++) {
+    
+                let s1 = data[i].split(",")
+                let idClean = s1[0].replace("ObjectId(","").replace(")","").replace("{","")
+                let modifiedClean = s1[8].replace("}","")
+                idList.push(idClean.split(":")[1])
+                businessPartnerList.push(s1[1].split(":")[1])
+                NameList.push(s1[2].split(":")[1])
+                isDeletedList.push(s1[3].split(":")[1])
+                isModifiedList.push(s1[4].split(":")[1])
+                isDraftList.push(s1[5].split(":")[1])
+                createdbyList.push(s1[6].split(":")[1])
+                createddateList.push(s1[7].split(":")[1])
+                modifiedbyList.push(s1[8].split(":")[1])
+                modifieddateList.push(modifiedClean.split(":")[1])
+    
+            }
+            for (let i = 0; i < idList.length; i++) {
+            //console.log("object")
+                let obj = {
+                    "id"                :   idList[i],
+                    "BPName"            :   businessPartnerList[i],
+                    "Name"              :   NameList[i],
+                    "isDeleted"         :   isDeletedList[i],
+                    "isModified"        :   isModifiedList[i],
+                    "isDraft"           :   isDraftList[i],
+                    "createdby"         :   createdbyList[i],
+                    "createddate"       :   createddateList[i],
+                    "modifiedby"        :   modifiedbyList[i],
+                    "modifieddate"      :   modifieddateList[i],
+                
+                }
+                itemList.push(obj)
+            }
+            return itemList
+        };
+    
 
    /*  GetListOfWarehouses(){  
 
@@ -243,7 +245,8 @@ class InventoryTransfer extends Component {
             this.businessPartner = ""
             return
         }
-       this.state.businessPartner = e[0].businessPartner
+       this.state.BPName = e[0].businessPartner
+       //this.onChangeName();
        
        //console.log(this.state.businessPartner + " :businessPartner")
     }
@@ -302,6 +305,19 @@ class InventoryTransfer extends Component {
             modalListOfWarehouse: false,
         })
     }
+
+    handleShowBusiPartner = ()=>{
+        this.setState({
+            modalBusinessPartner:   true
+        })
+    }
+
+    handleModalBusiPArt = (e) =>{
+        this.setState({
+            modalBusinessPartner: false,
+        })
+    }
+
 
 
     render() {
@@ -473,7 +489,7 @@ class InventoryTransfer extends Component {
                     <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                         <Col sm="8">
                             <Card style={{background : "#f0fff9"}}>
-                                <Card.Header style={{background : "#ababac"}}>INVENTORY >> TRANSFER</Card.Header>
+                                <Card.Header style={{background : "#ababac"}}>Inventory >> Transfer</Card.Header>
                                 <Card.Body>
                                     <Form>
                                         <Alert isOpen={this.state.isshow} color={this.state.color} fade={this.state.fade} className={this.state.isshow ? 'display-block' : 'display-none'}>
@@ -483,11 +499,17 @@ class InventoryTransfer extends Component {
 
                                         <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                BUSINESS PARTNER
+                                                Business Partner
                                             </Form.Label>
+                                            <Col sm="1">
+                                                <Button style={{fontSize:'11px', textDecoration: "none"}}
+                                                    variant="link" onClick={this.handleShowBusiPartner}> 
+                                                    <ArrowRight style={{color: "#f4d56e" }} size={20}/> <span style={{color: "#000000" }}></span> 
+                                                </Button>
+                                            </Col>
                                             <Col sm="3">
                                                 <Typeahead
-                                                    labelKey='businessPartner'
+                                                    labelKey='BPName'
                                                     id="basic-example"
                                                     onChange={this.onChangeBusinessPartner}
                                                     options={this.state.DataTmp}
@@ -498,7 +520,7 @@ class InventoryTransfer extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="1" style={{fontWeight : "bold"}}>
-                                                NO.
+                                                No.
                                             </Form.Label>
                                             <Col sm="1">
                                                 <Form.Control 
@@ -511,7 +533,7 @@ class InventoryTransfer extends Component {
                                                     placeholder="Primary"
                                                 />
                                             </Col>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Form.Control 
                                                     ref="employeeNo"
                                                     name="employeeNo"
@@ -524,15 +546,18 @@ class InventoryTransfer extends Component {
                                         </Form.Group>
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                NAME
+                                        <Form.Label column sm="2" style={{fontWeight : "bold"}}>
+                                                Name
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
-                                                <Typeahead 
+                                                <Form.Control  
                                                     labelKey='Name'
                                                     id="basic-example"
                                                     onChange={this.onChangeName}
-                                                    options={this.state.DataTmp}
+                                                    value={this.state.employeeNo}
+                                                    //options={this.state.unknownData}
                                                     autoComplete="off"
                                                     readOnly
                                                 />
@@ -540,9 +565,9 @@ class InventoryTransfer extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                STATUS
+                                                Status
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Form.Control 
                                                     ref="employeeNo"
                                                     name="employeeNo"
@@ -556,8 +581,10 @@ class InventoryTransfer extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                CONTACT PERSON
+                                                Contact Person
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
                                                 <Form.Control 
                                                     ref="name"
@@ -570,9 +597,9 @@ class InventoryTransfer extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            POSTING DATE
+                                            Posting Date
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <DatePicker
                                                     ref='postingDate'
                                                     selected={this.state.postingDate}
@@ -587,8 +614,10 @@ class InventoryTransfer extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                SHIP TO
+                                                Ship to
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
                                                 <Form.Control as="select">
                                                     <option>select ship to </option>
@@ -599,9 +628,9 @@ class InventoryTransfer extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            DOCUMENT DATE
+                                            Document Date
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <DatePicker
                                                     ref='documentDate'
                                                     selected={this.state.documentDate}
@@ -617,10 +646,12 @@ class InventoryTransfer extends Component {
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Col sm="6">
                                             </Col>
+                                            <Col sm="1">
+                                            </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            REFERENCED DOCUMENT
+                                            Reference Document
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                             <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleEmpAdd}>
                                                 ...
                                             </Button>
@@ -631,10 +662,12 @@ class InventoryTransfer extends Component {
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Col sm="6">
                                             </Col>
+                                            <Col sm="1">
+                                            </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                FROM WAREHOUSE
+                                                From Warehouse
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Typeahead
                                                     labelKey='whse'
                                                     id="basic-example"
@@ -649,10 +682,12 @@ class InventoryTransfer extends Component {
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Col sm="6">
                                             </Col>
+                                            <Col sm="1">
+                                            </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                TO WAREHOUSE
+                                                To Warehouse
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 <Typeahead
                                                     labelKey='whse'
                                                     id="basic-example"
@@ -667,8 +702,10 @@ class InventoryTransfer extends Component {
 
                                         <Form.Group className="mt-3" as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            PRICE LIST
+                                            Price List
                                             </Form.Label>
+                                            <Col sm="1">
+                                            </Col>
                                             <Col sm="3">
                                                 <Form.Control as="select">
                                                     <option>select price list</option>
@@ -678,9 +715,9 @@ class InventoryTransfer extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                TO BIN LOCATION
+                                                To Bin Location
                                             </Form.Label>
-                                            <Col sm="4">
+                                            <Col sm="3">
                                                 {/* <Typeahead
                                                     labelKey='whse'
                                                     id="basic-example"
@@ -737,7 +774,7 @@ class InventoryTransfer extends Component {
 
                                         <Form.Group className="mt-5" as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            SALES EMPLOYEE
+                                                Sales Employee
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Form.Control 
@@ -759,7 +796,7 @@ class InventoryTransfer extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            JOURNAL REMARKS
+                                            Journal Remarks
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Form.Control 
@@ -772,7 +809,7 @@ class InventoryTransfer extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            REMARKS
+                                            Remarks
                                             </Form.Label>
                                             <Col sm="4">
                                                 <Form.Control 
@@ -795,7 +832,7 @@ class InventoryTransfer extends Component {
                                             <Col sm="2">
                                                 <Dropdown>
                                                     <Dropdown.Toggle  style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} id="dropdown-basic">
-                                                        COPY TO
+                                                        Copy To
                                                     </Dropdown.Toggle>
 
                                                     <Dropdown.Menu>
@@ -816,7 +853,7 @@ class InventoryTransfer extends Component {
 
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PLATE NO:
+                                        Plate No:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -830,7 +867,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DRIVER:
+                                        Driver:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -844,7 +881,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        SEAL NO:
+                                        Seal No:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -858,7 +895,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        HELPER:
+                                        Helper:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -872,7 +909,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        EXPORTED?:
+                                        Exported?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -887,7 +924,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        POS REF:
+                                        POS Ref:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -901,7 +938,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CHECK BY:
+                                        Check By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -915,7 +952,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        RECIEVED BY?:
+                                        Recieved By?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -930,7 +967,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        RETURN TO OA?:
+                                        Return to OA?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -941,7 +978,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CHECKED BY:
+                                        Checked By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -955,7 +992,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        APPROVED BY:
+                                        Approved By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -969,7 +1006,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        ARRIVED IN PORT:
+                                        Arrived In Port?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -980,7 +1017,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        IT TYPE:
+                                        IT Type:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -994,7 +1031,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DELIVERY TO STORE?:
+                                        Delivery To Store?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -1005,7 +1042,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DOCUMENT ID:
+                                        Document ID:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1019,7 +1056,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CONFIRMED?:
+                                        Confirmed?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1033,7 +1070,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PULL OUT REASON:
+                                        Pull Out Reason:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -1044,7 +1081,7 @@ class InventoryTransfer extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        OUTLETS SM/ WALTER OUTRIGHT:
+                                        Outlets SM/ Walter Outright:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1070,6 +1107,10 @@ class InventoryTransfer extends Component {
                <ListOfWarehouse
                     show={this.state.modalListOfWarehouse}
                     onHide={this.handleModalCloseWarehouse}
+                />
+                <BusinessPartnerModal
+                    show={this.state.modalBusinessPartner}
+                    onHide={this.handleModalBusiPArt}
                 />
             </div> 
         )

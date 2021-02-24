@@ -292,7 +292,7 @@ class SalesOrder extends Component {
                     <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                         <Col sm="8">
                             <Card style={{background : "#f0fff9"}}>
-                                <Card.Header style={{background : "#ababac"}}>INVENTORY >> SALES ORDER</Card.Header>
+                                <Card.Header style={{background : "#ababac"}}>Inventory >> Sales Order</Card.Header>
                                 <Card.Body>
                                     <Form>
                                         <Alert isOpen={this.state.isshow} color={this.state.color} fade={this.state.fade} className={this.state.isshow ? 'display-block' : 'display-none'}>
@@ -305,7 +305,7 @@ class SalesOrder extends Component {
                                                     <Tab eventKey="default" title="Contents">
                                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                                     <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                    ITEM/SERVICE ITEM
+                                                    Item / Service Item
                                                     </Form.Label>
                                                     <Col sm="2">
                                                         <Form.Control 
@@ -320,7 +320,7 @@ class SalesOrder extends Component {
                                                     <Col sm="4">
                                                     </Col>
                                                     <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                    SUMMARY TYPE
+                                                    Summary Type
                                                     </Form.Label>
                                                     <Col sm="2">
                                                         <Form.Control as="select">
@@ -364,9 +364,9 @@ class SalesOrder extends Component {
                                             </Card.Body>
                                         </Card>
 
-                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Group as={Row} className="mt-5" controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            SALES EMPLOYEE
+                                            Sales Employee
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Form.Control as="select">
@@ -377,7 +377,7 @@ class SalesOrder extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            TOTAL BEFORE DISCOUNT
+                                            Total Before Discount
                                             </Form.Label>
                                             <Col sm="4">
                                                 <Form.Control 
@@ -394,7 +394,7 @@ class SalesOrder extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                OWNER
+                                                Owner
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Typeahead
@@ -409,7 +409,7 @@ class SalesOrder extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                DISCOUNT
+                                                Discount
                                             </Form.Label>
                                             <Col sm="1">
                                                 <Form.Control 
@@ -441,7 +441,7 @@ class SalesOrder extends Component {
                                             <Col sm="6">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            FREIGHT
+                                            Freight
                                                 <Button style={{fontSize:'11px', textDecoration: "none",}}
                                                     variant="link"
                                                 > <ArrowRight style={{color: "#f4d56e" }} size={20}/> <span style={{color: "#000000" }}>{}</span> 
@@ -465,7 +465,7 @@ class SalesOrder extends Component {
                                             
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                                                ROUNDING
+                                                Rounding
                                             </Form.Label>
                                             <Col sm="4">
                                                 <Form.Control 
@@ -483,7 +483,7 @@ class SalesOrder extends Component {
                                             <Col sm="6">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                TAX
+                                                Tax
                                             </Form.Label>
                                             <Col sm="4">
                                                 <Form.Control 
@@ -501,7 +501,7 @@ class SalesOrder extends Component {
                                             <Col sm="6">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                TOTAL
+                                                Total
                                             </Form.Label>
                                             <Col sm="4">
                                                 <Form.Control 
@@ -518,7 +518,7 @@ class SalesOrder extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                             REMARKS
+                                             Remarks
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Form.Control 
@@ -548,7 +548,7 @@ class SalesOrder extends Component {
                                             <Col sm="2">
                                                 <Dropdown>
                                                     <Dropdown.Toggle  style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} id="dropdown-basic">
-                                                        COPY TO
+                                                        Copy To
                                                     </Dropdown.Toggle>
 
                                                     <Dropdown.Menu>
@@ -569,7 +569,7 @@ class SalesOrder extends Component {
 
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        WITH DOWNPAYMENT?
+                                        With Downpayment?
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -580,7 +580,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        WITH DOWNPAYMENT?
+                                        With Landed Cost?
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -591,7 +591,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PLATE NO:
+                                        Plate No:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -605,7 +605,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DRIVER:
+                                        Driver:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -619,7 +619,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        SEAL NO:
+                                        Seal No:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -633,7 +633,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        HELPER:
+                                        Helper:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -647,7 +647,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        NATURE OF TRANSACTION:
+                                        Nature Of Trnasaction:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -661,7 +661,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        SPS CLEARANCE:
+                                        SPS Clearance:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -675,7 +675,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        COMMERCIAL INV:
+                                        Commercial Inv:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -689,7 +689,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        ORIGIN:
+                                        Origin:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -703,7 +703,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PACKING SLIP:
+                                        Packing Slip:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -717,7 +717,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        HEALTH CERTIFICATE:
+                                        Health Certificate:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -731,7 +731,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        INSURANCE:
+                                        Insurance:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -745,7 +745,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        BILL OF LADING:
+                                        Bill Of Lading:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -759,7 +759,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CONTAINER NUM:
+                                        Container Num:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -773,7 +773,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        EXPORTED?:
+                                        Exported?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -787,7 +787,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        POS REF:
+                                        POS Ref:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -801,7 +801,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        STATUS:
+                                        Status:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -815,7 +815,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CHECK BY:
+                                        Check By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -829,7 +829,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        RECEIVED BY:
+                                        Received By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -843,7 +843,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        RETURN TO OA:
+                                        Return To OA:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -857,7 +857,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CHECKED BY:
+                                        Checked By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -871,7 +871,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        APPROVED BY:
+                                        Approved By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -885,7 +885,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        ARRIVED IN PORT?:
+                                        Arrived In Port?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -899,7 +899,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        ITR TYPE:
+                                        ITR Type:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -913,7 +913,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        IT TYPE:
+                                        IT Type:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -927,7 +927,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DELIVERY TO STORE?:
+                                        Delivery To Store?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -941,7 +941,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DOCUMENT ID:
+                                        Document ID:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -955,7 +955,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CONFIRMED:
+                                        Confirmed:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -969,7 +969,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PULL OUT REASON:
+                                        Pull Out Reason:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -983,7 +983,7 @@ class SalesOrder extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        OUTLETS SM/WALTER OUTRIGHT:
+                                        Outlets SM/Walter Outright:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 

@@ -487,7 +487,7 @@ class InventoryTransferRequest extends Component {
                     <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                         <Col sm="8">
                             <Card style={{background : "#f0fff9"}}>
-                                <Card.Header style={{background : "#ababac"}}>INVENTORY >> TRANSFER REQUEST</Card.Header>
+                                <Card.Header style={{background : "#ababac"}}>Inventory >> Transfer Request</Card.Header>
                                 <Card.Body>
                                     <Form>
                                         <Alert isOpen={this.state.isshow} color={this.state.color} fade={this.state.fade} className={this.state.isshow ? 'display-block' : 'display-none'}>
@@ -497,7 +497,7 @@ class InventoryTransferRequest extends Component {
 
                                         <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                BUSINESS PARTNER
+                                                Business Partner
                                             </Form.Label>
                                             <Col sm="1">
                                                 <Button style={{fontSize:'11px', textDecoration: "none"}}
@@ -518,7 +518,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="1" style={{fontWeight : "bold"}}>
-                                                NO.
+                                                No.
                                             </Form.Label>
                                             <Col sm="1">
                                                 <Form.Control 
@@ -545,7 +545,7 @@ class InventoryTransferRequest extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                NAME
+                                                Name
                                             </Form.Label>
                                             <Col sm="1">
                                             </Col>
@@ -563,7 +563,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                STATUS
+                                                Status
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Form.Control 
@@ -579,7 +579,7 @@ class InventoryTransferRequest extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                CONTACT PERSON
+                                                Contact Person
                                             </Form.Label>
                                             <Col sm="1">
                                             </Col>
@@ -595,7 +595,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            POSTING DATE
+                                            Posting Date
                                             </Form.Label>
                                             <Col sm="3">
                                                 <DatePicker
@@ -612,7 +612,7 @@ class InventoryTransferRequest extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                SHIP TO
+                                                Ship To
                                             </Form.Label>
                                             <Col sm="1">
                                             </Col>
@@ -626,7 +626,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            DUE DATE
+                                            Due Date
                                             </Form.Label>
                                             <Col sm="3">
                                                 <DatePicker
@@ -658,7 +658,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            DOCUMENT DATE
+                                            Document Date
                                             </Form.Label>
                                             <Col sm="3">
                                                 <DatePicker
@@ -679,7 +679,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            REFERENCED DOCUMENT
+                                            Referenced Document
                                             </Form.Label>
                                             <Col sm="3">
                                             <Button style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} onClick={this.handleEmpAdd}>
@@ -695,7 +695,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                FROM WAREHOUSE
+                                                From Warehouse
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Typeahead
@@ -715,7 +715,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                                TO WAREHOUSE
+                                                To Warehouse
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Typeahead
@@ -732,7 +732,7 @@ class InventoryTransferRequest extends Component {
 
                                         <Form.Group className="mt-3" as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            PRICE LIST
+                                            Price List
                                             </Form.Label>
                                             <Col sm="1">
                                             </Col>
@@ -781,7 +781,7 @@ class InventoryTransferRequest extends Component {
 
                                         <Form.Group className="mt-5" as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            SALES EMPLOYEE
+                                            Sales Employee
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Form.Control 
@@ -796,7 +796,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            PICK AND PACK REMARKS
+                                            Pick And Pack Remarks
                                             </Form.Label>
                                             <Col sm="4">
                                                 <Form.Control 
@@ -811,7 +811,7 @@ class InventoryTransferRequest extends Component {
 
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            JOURNAL REMARKS
+                                            Journal Remarks
                                             </Form.Label>
                                             <Col sm="3">
                                                 <Form.Control 
@@ -824,7 +824,7 @@ class InventoryTransferRequest extends Component {
                                             <Col sm="1">
                                             </Col>
                                             <Form.Label column sm="2" style={{fontWeight : "bold"}}>
-                                            REMARKS
+                                            Remarks
                                             </Form.Label>
                                             <Col sm="4">
                                                 <Form.Control 
@@ -848,7 +848,7 @@ class InventoryTransferRequest extends Component {
                                                 <ButtonToolbar>
                                                     <Dropdown>
                                                         <Dropdown.Toggle  style={{minWidth:'60px', backgroundColor: "#f4d56e", color: "#000000", border: "1px solid #000000"}} id="dropdown-basic">
-                                                            COPY TO
+                                                            Copy To
                                                         </Dropdown.Toggle>
 
                                                         <Dropdown.Menu>
@@ -872,7 +872,7 @@ class InventoryTransferRequest extends Component {
 
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        WITH DOWNPAYMENT?
+                                        With Downpayment?
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -883,7 +883,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        WITH DOWNPAYMENT?
+                                        With Landed Cost?
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control as="select">
@@ -894,7 +894,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PLATE NO:
+                                        Plate No:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -908,7 +908,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DRIVER:
+                                        Driver:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -922,7 +922,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        SEAL NO:
+                                        Seal No:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -936,7 +936,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        HELPER:
+                                        Helper:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -950,7 +950,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        NATURE OF TRANSACTION:
+                                        Nature Of Transaction:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -964,7 +964,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        SPS CLEARANCE:
+                                        SPS Clearance:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -978,7 +978,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        COMMERCIAL INV:
+                                        Commercial Inv:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -992,7 +992,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        ORIGIN:
+                                        Origin:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1006,7 +1006,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PACKING SLIP:
+                                        Packing Slip:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1020,7 +1020,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        HEALTH CERTIFICATE:
+                                        Health Certificate:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1034,7 +1034,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        INSURANCE:
+                                        Insurance:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1048,7 +1048,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        BILL OF LADING:
+                                        Bill Of Lading:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1062,7 +1062,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CONTAINER NUM:
+                                        Container Num:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1076,7 +1076,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        EXPORTED?:
+                                        Exported?:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1090,7 +1090,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        POS REF:
+                                        POS Ref:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1104,7 +1104,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        STATUS:
+                                        Status:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1118,7 +1118,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CHECK BY:
+                                        Check By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1132,7 +1132,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        RECEIVED BY:
+                                        Receive By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1146,7 +1146,18 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        RETURN TO OA:
+                                        Return To OA:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control as="select"> 
+                                                <option>No</option>
+                                                <option>Yes</option>
+                                            </Form.Control>
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        Checked By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1160,7 +1171,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CHECKED BY:
+                                        Approved By:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1174,7 +1185,18 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        APPROVED BY:
+                                        Arrived In Port?:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control as="select">
+                                                <option>No</option>
+                                                <option>Yes</option>
+                                            </Form.Control>
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        ITR Type:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1188,7 +1210,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        ARRIVED IN PORT?:
+                                        IT Type:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1202,7 +1224,18 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        ITR TYPE:
+                                        Delivery To Store?:
+                                        </Form.Label>
+                                        <Col sm="7">
+                                            <Form.Control as="select">
+                                                <option>No</option>
+                                                <option>Yes</option>
+                                            </Form.Control>
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
+                                        Document ID:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1216,7 +1249,7 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        IT TYPE:
+                                        Confirmed:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
@@ -1230,63 +1263,18 @@ class InventoryTransferRequest extends Component {
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DELIVERY TO STORE?:
+                                        Pull Out Reason:
                                         </Form.Label>
                                         <Col sm="7">
-                                            <Form.Control 
-                                                ref="name"
-                                                name="name"
-                                                value={this.state.name}
-                                                onChange={this.onChangeName}
-                                                autoComplete="off"
-                                            />
+                                            <Form.Control as="select">
+                                                <option>No</option>
+                                                <option>Yes</option>
+                                            </Form.Control>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextEmail">
                                         <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        DOCUMENT ID:
-                                        </Form.Label>
-                                        <Col sm="7">
-                                            <Form.Control 
-                                                ref="name"
-                                                name="name"
-                                                value={this.state.name}
-                                                onChange={this.onChangeName}
-                                                autoComplete="off"
-                                            />
-                                        </Col>
-                                    </Form.Group>
-                                    <Form.Group as={Row} controlId="formPlaintextEmail">
-                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        CONFIRMED:
-                                        </Form.Label>
-                                        <Col sm="7">
-                                            <Form.Control 
-                                                ref="name"
-                                                name="name"
-                                                value={this.state.name}
-                                                onChange={this.onChangeName}
-                                                autoComplete="off"
-                                            />
-                                        </Col>
-                                    </Form.Group>
-                                    <Form.Group as={Row} controlId="formPlaintextEmail">
-                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        PULL OUT REASON:
-                                        </Form.Label>
-                                        <Col sm="7">
-                                            <Form.Control 
-                                                ref="name"
-                                                name="name"
-                                                value={this.state.name}
-                                                onChange={this.onChangeName}
-                                                autoComplete="off"
-                                            />
-                                        </Col>
-                                    </Form.Group>
-                                    <Form.Group as={Row} controlId="formPlaintextEmail">
-                                        <Form.Label column sm="5" style={{fontWeight : "bold"}}>
-                                        OUTLETS SM/WALTER OUTRIGHT:
+                                        Outlets SM/Walter Outright:
                                         </Form.Label>
                                         <Col sm="7">
                                             <Form.Control 
