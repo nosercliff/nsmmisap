@@ -44,18 +44,30 @@ class InstallmentsModal extends Component {
             {
                 dataField   : '',
                 text        : '#',
+                headerStyle : () => {
+                    return { width  : "1%" };
+                }
             },
             {
                 dataField   : '',
                 text        : 'Month',
+                headerStyle : () => {
+                    return { width  : "24%" };
+                }
             },
             {
                 dataField   : '',
                 text        : 'Days',
+                headerStyle : () => {
+                    return { width  : "25%" };
+                }
             },
             {
                 dataField   : '',
                 text        : '%',
+                headerStyle : () => {
+                    return { width  : "25%" };
+                }
             },
         ]
         const selectRow = {

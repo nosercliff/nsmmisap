@@ -55,45 +55,6 @@ class PaymentTerms extends Component {
     }
 
     render() {
-        const { ExportCSVButton } = CSVExport;
-        
-        const paymentsDataColumn = [
-            {
-                dataField   : '',
-                text        : '#',
-            },
-            {
-                dataField   : '',
-                text        : 'Account Type Name',
-            },
-            {
-                dataField   : '',
-                text        : 'Account Code',
-            },
-            {
-                dataField   : '',
-                text        : 'Account Name',
-            },
-        ]
-        const selectRow = {
-            mode: 'checkbox',
-            clickToSelectAndEditCell: true,
-            onSelect: (row, isSelect, rowIndex, e) => {
-                this.state.sapData.map(function(item,i){
-                    if(item.id===row.id)
-                    {
-                        item.isDeleted = isSelect ? "1" : "0"
-                        item.isModified = isSelect ? "1" : "0"
-                    }
-                })
-            }
-        };
-
-        const rowEvents = {
-            onClick: (e, row, rowIndex) => {
-            }
-        };
-
         return(
         
             <Modal

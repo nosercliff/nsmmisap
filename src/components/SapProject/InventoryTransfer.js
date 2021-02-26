@@ -489,7 +489,7 @@ class InventoryTransfer extends Component {
                     <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                         <Col sm="8">
                             <Card style={{background : "#f0fff9"}}>
-                                <Card.Header style={{background : "#ababac"}}>Inventory >> Transfer</Card.Header>
+                                <Card.Header style={{background : "#ababac", fontWeight : "bold"}}>Inventory >> Transfer</Card.Header>
                                 <Card.Body>
                                     <Form>
                                         <Alert isOpen={this.state.isshow} color={this.state.color} fade={this.state.fade} className={this.state.isshow ? 'display-block' : 'display-none'}>

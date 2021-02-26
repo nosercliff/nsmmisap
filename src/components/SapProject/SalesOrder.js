@@ -292,7 +292,7 @@ class SalesOrder extends Component {
                     <Form.Group className="mt-4" as={Row} controlId="formPlaintextEmail">
                         <Col sm="8">
                             <Card style={{background : "#f0fff9"}}>
-                                <Card.Header style={{background : "#ababac"}}>Inventory >> Sales Order</Card.Header>
+                                <Card.Header style={{background : "#ababac", fontWeight : "bold"}}>Inventory >> Sales Order</Card.Header>
                                 <Card.Body>
                                     <Form>
                                         <Alert isOpen={this.state.isshow} color={this.state.color} fade={this.state.fade} className={this.state.isshow ? 'display-block' : 'display-none'}>
@@ -357,7 +357,7 @@ class SalesOrder extends Component {
                                                     </Tab>
                                                     <Tab eventKey="logistics" title="Logistics"></Tab>
                                                     <Tab eventKey="accounting" title="Accounting"></Tab>
-                                                    <Tab eventKey="electronincDocuments" title="ElectronincDocuments"></Tab>
+                                                    <Tab eventKey="electronicDocuments" title="Electronic Documents"></Tab>
                                                     <Tab eventKey="sttachments" title="Attachments"></Tab>
 
                                                 </Tabs>
